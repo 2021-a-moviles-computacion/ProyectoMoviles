@@ -69,7 +69,7 @@
             android:layout_height="22dp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/mate_sc"

@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyRoom">
-        <activity android:name=".Registarse"></activity>
+        <activity android:name=".ListaDeHoteles"></activity>
+        <activity android:name=".RcvHoteles"></activity>
+        <activity android:name=".Registarse" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

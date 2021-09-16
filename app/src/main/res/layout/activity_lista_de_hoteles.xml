@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradiente_linear"
-
-    tools:context=".MainActivity">
-
+    tools:context=".ListaDeHoteles">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,131 +16,57 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_weight="0"
+            android:layout_height="42dp"
+            android:background="@drawable/gradiente_horizontal"
             android:orientation="horizontal"
             android:padding="5dp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageView7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:cropToPadding="false"
-                app:srcCompat="@color/X_celeste_pero_azulado" />
+                app:srcCompat="@drawable/ic_baseline_menu_24" />
+
+            <TextView
+                android:id="@+id/Title"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mate_sc"
+                android:includeFontPadding="true"
+                android:paddingLeft="20dp"
+                android:text="MyRoom"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/X_celeste_pero_azulado"
+                android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imageView8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:cropToPadding="false"
-                app:srcCompat="@color/X_verde_claro_como_sus_ojos" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:cropToPadding="false"
-                app:srcCompat="@color/X_calcibondk" />
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:cropToPadding="false"
-                app:srcCompat="@color/X_durazno_Peach_para_los_compas" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:cropToPadding="false"
-                app:srcCompat="@color/white" />
+                app:srcCompat="@drawable/ic_baseline_person_24" />
         </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="22dp" />
-
-        <TextView
-            android:id="@+id/Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/mate_sc"
-            android:includeFontPadding="true"
-            android:text="MyRoom"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/X_celeste_pero_azulado"
-            android:textSize="45sp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:includeFontPadding="true"
-            android:letterSpacing="0.35"
-            android:text="BEST HOTEL ROOM RECOMENDATIONS APP"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/X_celeste_pero_azulado"
-            android:textSize="12sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="142dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="134dp"
-            android:orientation="vertical">
+            android:layout_height="49dp"
+            android:background="@color/X_calcibondk"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-            <EditText
-                android:id="@+id/txtUsuario"
-                android:layout_width="259dp"
-                android:layout_height="55dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_border_txt"
-                android:ems="10"
-                android:hint="Usuario o Correo"
+            <SearchView
+                android:layout_width="319dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_border_txt" />
 
-                android:includeFontPadding="false"
-
-                android:inputType="textEmailAddress"
-                android:paddingLeft="20dp"
-                android:textColor="@color/X_celeste_pero_azulado"
-                android:textColorHint="@color/X_celeste_pero_azulado"
-                android:textSize="16sp"
-                android:textStyle="italic" />
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="14dp" />
-
-            <EditText
-                android:id="@+id/txt_clave"
-                android:layout_width="259dp"
-                android:layout_height="55dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_border_txt"
-                android:ems="10"
-                android:hint="Clave"
-                android:includeFontPadding="false"
-                android:inputType="textPassword"
-
-                android:paddingLeft="20dp"
-
-                android:textColor="@color/X_celeste_pero_azulado"
-
-                android:textColorHint="@color/X_celeste_pero_azulado"
-                android:textSize="16sp"
-                android:textStyle="italic" />
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_baseline_tune_24" />
 
         </LinearLayout>
 
@@ -249,5 +173,4 @@
             android:textStyle="italic" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
