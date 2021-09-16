@@ -3,69 +3,95 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="370dp"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/nombre_usuario"
+    android:padding="5dp"
     tools:context=".RcvHoteles">
 
   <ImageView
       android:id="@+id/imageView6"
       android:layout_width="301dp"
-      android:layout_height="match_parent"
+      android:layout_height="157dp"
       android:layout_weight="1"
       app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
 
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:layout_weight="1"
       android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txt_nombre_hotel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:fontFamily="@font/mate_sc"
+        android:text="NombreTexto"
+        android:textColor="@color/X_azul_intenso_como_tu_ex"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/txt_direccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Direccion"
+        android:textStyle="italic" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txt_nombre_hotel2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Punuacion"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/txt_habitacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="NombreTipoHabitacion"
+        android:textAlignment="textEnd"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/txt_fecha_ectr_sal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="camas"
+        android:textAlignment="textEnd"
+        android:textColor="@color/X_cafe_Con_Pan"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/txt_adultos_noches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="adultos noches"
+        android:textAlignment="textEnd"
+        android:textColor="@color/X_celeste_pero_azulado"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/txt_precio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Precio"
+        android:textAlignment="textEnd"
+        android:textColor="@color/X_verde_shrek"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/txt_tipo_pago"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="tipo de pago"
+        android:textAlignment="textEnd"
+        android:textColor="@color/X_celeste_pero_azulado"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
   </LinearLayout>
 </LinearLayout>
