@@ -11,16 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyRoom">
-        <activity android:name=".ListaDeHoteles"></activity>
-        <activity android:name=".RcvHoteles"></activity>
-        <activity android:name=".Registarse" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".PagoConPaypal"></activity>
+        <activity android:name=".PagoConTarjeta" />
+        <activity android:name=".Reserva" />
+        <activity android:name=".MisReservas" />
+        <activity android:name=".PreReserva" />
+        <activity android:name=".TipoDeHabitacion" />
+        <activity android:name=".Favoritos" />
+        <activity android:name=".Hotel" />
+        <activity android:name=".Perfil" />
+        <activity android:name=".ListaDeHoteles">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RcvHoteles" />
+        <activity android:name=".Registarse" />
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
