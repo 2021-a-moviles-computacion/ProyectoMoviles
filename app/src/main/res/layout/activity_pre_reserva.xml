@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradiente_linear"
     tools:context=".PreReserva">
+
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_menu_lateral"
         android:layout_width="0dp"
@@ -214,6 +216,7 @@
 
     </com.google.android.material.navigation.NavigationView>
 
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -260,12 +263,82 @@
                 app:srcCompat="@drawable/ic_baseline_person_24" />
         </LinearLayout>
 
-
-        <ScrollView
-            android:id="@+id/scroll"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp"/>
+            android:layout_height="688dp"
+            android:orientation="vertical">
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="562dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/servicios_habitacion_hotel"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="195dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="TOTAL:"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="@color/X_verde_shrek"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:background="@drawable/boton_ver_habitacion"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="Añadir Habitación(es)"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
+    <!-- hola perro-->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="393dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="153dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

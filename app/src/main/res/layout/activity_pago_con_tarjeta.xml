@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradiente_linear"
     tools:context=".PagoConTarjeta">
+
+    <!--
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_menu_lateral"
         android:layout_width="0dp"
@@ -213,7 +215,7 @@
         </LinearLayout>
 
     </com.google.android.material.navigation.NavigationView>
-
+-->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -259,13 +261,127 @@
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_baseline_person_24" />
         </LinearLayout>
-
-
-        <ScrollView
-            android:id="@+id/scroll"
+        <TextView
+            android:id="@+id/textView9821"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp"/>
+            android:layout_height="53dp"
+            android:background="@drawable/boton_positivo"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Añadir Habitación(es)"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="633dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="wrap_content"
+                android:layout_height="211dp"
+                app:srcCompat="@drawable/logo_tarjetas_de_credito" />
+
+            <EditText
+                android:id="@+id/txt_clave"
+                android:layout_width="259dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_border_txt"
+                android:ems="10"
+                android:hint="Nombre Propietario"
+                android:includeFontPadding="false"
+
+                android:inputType="textPassword"
+
+                android:paddingLeft="20dp"
+
+                android:textColor="@color/X_celeste_pero_azulado"
+                android:textColorHint="@color/X_celeste_pero_azulado"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <EditText
+                android:id="@+id/txt_clave12"
+                android:layout_width="259dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_border_txt"
+                android:ems="10"
+                android:hint="Número de tarjeta"
+                android:includeFontPadding="false"
+
+                android:inputType="textPassword"
+
+                android:paddingLeft="20dp"
+
+                android:textColor="@color/X_celeste_pero_azulado"
+                android:textColorHint="@color/X_celeste_pero_azulado"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <EditText
+                android:id="@+id/txt_clave13"
+                android:layout_width="259dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_border_txt"
+                android:ems="10"
+                android:hint="mm/yyyy"
+                android:includeFontPadding="false"
+
+                android:inputType="textPassword"
+
+                android:paddingLeft="20dp"
+
+                android:textColor="@color/X_celeste_pero_azulado"
+                android:textColorHint="@color/X_celeste_pero_azulado"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <EditText
+                android:id="@+id/txt_clave14"
+                android:layout_width="259dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_border_txt"
+                android:ems="10"
+                android:hint="CVV"
+                android:includeFontPadding="false"
+
+                android:inputType="textPassword"
+
+                android:paddingLeft="20dp"
+
+                android:textColor="@color/X_celeste_pero_azulado"
+                android:textColorHint="@color/X_celeste_pero_azulado"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:background="@drawable/boton_ver_habitacion"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Confirmar Pago"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
 
