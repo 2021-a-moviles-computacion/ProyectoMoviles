@@ -255,7 +255,8 @@
                 android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/tv_img_perfil"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -270,7 +271,7 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/img_perfil"
                 android:layout_width="392dp"
                 android:layout_height="343dp"
                 android:layout_alignParentStart="true"
@@ -286,7 +287,7 @@
                 app:srcCompat="@drawable/perfirl_test" />
 
             <TextView
-                android:id="@+id/textView2333"
+                android:id="@+id/tv_nombrePerfil"
                 android:layout_width="237dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -303,8 +304,8 @@
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/imageView12"
-                app:layout_constraintTop_toTopOf="@+id/imageView12" />
+                app:layout_constraintStart_toStartOf="@+id/img_perfil"
+                app:layout_constraintTop_toTopOf="@+id/img_perfil" />
 
             <LinearLayout
                 android:layout_width="365dp"
@@ -394,7 +395,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/descripcionpersonal"
+                        android:id="@+id/txt_descripcionPersonal"
                         android:layout_width="125dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -424,7 +425,7 @@
                         android:text="Lugares Vicitados" />
 
                     <EditText
-                        android:id="@+id/txt_perfil_lugares_vicitados"
+                        android:id="@+id/txt_perfilLugaresVisitados"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -453,8 +454,8 @@
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/imageView12"
-                app:layout_constraintTop_toTopOf="@+id/imageView12" />
+                app:layout_constraintStart_toStartOf="@+id/img_perfil"
+                app:layout_constraintTop_toTopOf="@+id/img_perfil" />
 
         </RelativeLayout>
 

@@ -112,7 +112,7 @@
                 android:textColor="@color/X_azul_intenso_como_tu_ex" />
 
             <EditText
-                android:id="@+id/txtNombreRegistrar"
+                android:id="@+id/txt_NombreRegistrar"
                 android:layout_width="290dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
@@ -122,7 +122,7 @@
 
                 android:includeFontPadding="false"
 
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:paddingLeft="20dp"
                 android:textColor="@color/X_celeste_pero_azulado"
                 android:textColorHint="@color/X_celeste_pero_azulado"
@@ -139,7 +139,7 @@
                 android:textColor="@color/X_azul_intenso_como_tu_ex" />
 
             <EditText
-                android:id="@+id/txtApellidoRegistrar"
+                android:id="@+id/txt_ApellidoRegistrar"
                 android:layout_width="290dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
@@ -149,7 +149,6 @@
 
                 android:includeFontPadding="false"
 
-                android:inputType="textEmailAddress"
                 android:paddingLeft="20dp"
                 android:textColor="@color/X_celeste_pero_azulado"
                 android:textColorHint="@color/X_celeste_pero_azulado"
@@ -166,7 +165,7 @@
                 android:textColor="@color/X_azul_intenso_como_tu_ex" />
 
             <EditText
-                android:id="@+id/txtCorreoRegistrar"
+                android:id="@+id/txt_CorreoRegistrar"
                 android:layout_width="290dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
@@ -193,7 +192,7 @@
                 android:textColor="@color/X_azul_intenso_como_tu_ex" />
 
             <EditText
-                android:id="@+id/txtNombreDeUsuarioRegistrar"
+                android:id="@+id/txt_NombreDeUsuarioRegistrar"
                 android:layout_width="290dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
@@ -203,7 +202,7 @@
 
                 android:includeFontPadding="false"
 
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:paddingLeft="20dp"
                 android:textColor="@color/X_celeste_pero_azulado"
                 android:textColorHint="@color/X_celeste_pero_azulado"
@@ -220,7 +219,7 @@
                 android:textColor="@color/X_azul_intenso_como_tu_ex" />
 
             <EditText
-                android:id="@+id/txtContraseñaRegistrar"
+                android:id="@+id/txt_ContraseñaRegistrar"
                 android:layout_width="290dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
@@ -230,7 +229,7 @@
 
                 android:includeFontPadding="false"
 
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:paddingLeft="20dp"
                 android:textColor="@color/X_celeste_pero_azulado"
                 android:textColorHint="@color/X_celeste_pero_azulado"
@@ -247,7 +246,7 @@
                 android:textColor="@color/X_azul_intenso_como_tu_ex" />
 
             <EditText
-                android:id="@+id/txtRepetirContraseñaRegistrar"
+                android:id="@+id/txt_RepetirContraseñaRegistrar"
                 android:layout_width="290dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
@@ -257,7 +256,7 @@
 
                 android:includeFontPadding="false"
 
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:paddingLeft="20dp"
                 android:textColor="@color/X_celeste_pero_azulado"
                 android:textColorHint="@color/X_celeste_pero_azulado"
@@ -282,12 +281,12 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_RegistrarseApp"
                 android:layout_width="136dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/X_verde_claro_como_sus_ojos"
                 android:hapticFeedbackEnabled="false"
-                android:text="Ingresar"
+                android:text="Registrarse"
                 android:textAllCaps="false"
                 android:textColor="@color/X_verde_shrek"
                 android:textSize="16sp"
@@ -302,7 +301,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_SalirApp"
                 android:layout_width="129dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -327,7 +326,7 @@
             android:layout_height="28dp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txt_btn_IrRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"

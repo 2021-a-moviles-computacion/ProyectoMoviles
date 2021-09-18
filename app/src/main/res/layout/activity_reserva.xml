@@ -219,11 +219,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -254,19 +250,27 @@
                 android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/tv_img_perfil"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
                 app:srcCompat="@drawable/ic_baseline_person_24" />
         </LinearLayout>
-
 
         <ScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"/>
+            android:padding="5dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_listaReserva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </ScrollView>
+
 
     </LinearLayout>
 

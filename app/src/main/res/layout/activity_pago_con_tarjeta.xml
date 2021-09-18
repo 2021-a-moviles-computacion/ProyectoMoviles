@@ -255,7 +255,8 @@
                 android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/tv_img_perfil"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -288,7 +289,7 @@
                 app:srcCompat="@drawable/logo_tarjetas_de_credito" />
 
             <EditText
-                android:id="@+id/txt_clave"
+                android:id="@+id/txt_propietarioTarjeta"
                 android:layout_width="259dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
@@ -298,7 +299,7 @@
                 android:hint="Nombre Propietario"
                 android:includeFontPadding="false"
 
-                android:inputType="textPassword"
+                android:inputType="text"
 
                 android:paddingLeft="20dp"
 
@@ -308,7 +309,7 @@
                 android:textStyle="italic" />
 
             <EditText
-                android:id="@+id/txt_clave12"
+                android:id="@+id/txv_numeroTarjeta"
                 android:layout_width="259dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
@@ -318,7 +319,7 @@
                 android:hint="Número de tarjeta"
                 android:includeFontPadding="false"
 
-                android:inputType="textPassword"
+                android:inputType="number"
 
                 android:paddingLeft="20dp"
 
@@ -328,17 +329,17 @@
                 android:textStyle="italic" />
 
             <EditText
-                android:id="@+id/txt_clave13"
+                android:id="@+id/txt_fechaExpTarjeta"
                 android:layout_width="259dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="20dp"
                 android:background="@drawable/rounded_border_txt"
                 android:ems="10"
-                android:hint="mm/yyyy"
+                android:hint="Fecha Expiracion (mm/yyyy)"
                 android:includeFontPadding="false"
 
-                android:inputType="textPassword"
+                android:inputType="text"
 
                 android:paddingLeft="20dp"
 
@@ -348,7 +349,7 @@
                 android:textStyle="italic" />
 
             <EditText
-                android:id="@+id/txt_clave14"
+                android:id="@+id/txt_cvvTarjeta"
                 android:layout_width="259dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
@@ -358,7 +359,7 @@
                 android:hint="CVV"
                 android:includeFontPadding="false"
 
-                android:inputType="textPassword"
+                android:inputType="numberPassword"
 
                 android:paddingLeft="20dp"
 
@@ -371,7 +372,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txt_btn_confirmarPagoTarjeta"
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:background="@drawable/boton_ver_habitacion"

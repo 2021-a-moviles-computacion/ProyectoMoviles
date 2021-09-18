@@ -254,7 +254,8 @@
                 android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/tv_img_perfil"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -283,6 +284,7 @@
                         android:layout_height="203dp">
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_fotosHotel"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:orientation="horizontal" />
@@ -294,12 +296,12 @@
                         android:orientation="vertical"></LinearLayout>
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/txv_NombreHotel"
                         android:layout_width="266dp"
                         android:layout_height="55dp"
                         android:background="@drawable/servicios_habitacion_hotel"
                         android:gravity="center"
-                        android:text="NOmbre Hotel"
+                        android:text="Nombre Hotel"
                         android:textColor="@color/X_azul_intenso_como_tu_ex"
                         android:textSize="16sp"
                         android:textStyle="bold|italic" />
@@ -309,6 +311,7 @@
                         android:layout_height="match_parent">
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_fotosHabitaciones"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:orientation="horizontal" />
@@ -335,10 +338,12 @@
                         android:orientation="horizontal">
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_servicios1"
                             android:layout_width="178dp"
                             android:layout_height="match_parent" />
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_servicios2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </LinearLayout>
@@ -351,11 +356,12 @@
             </ScrollView>
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tv_btn_VerHabitacionesHotel"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
                 android:background="@drawable/boton_ver_habitacion"
                 android:gravity="center"
+                android:clickable="true"
                 android:text="Ver Habitaciones"
                 android:textAlignment="center"
                 android:textColor="@color/white"

@@ -289,7 +289,7 @@
                 app:srcCompat="@drawable/paypal_logo" />
 
             <EditText
-                android:id="@+id/txt_clave"
+                android:id="@+id/txt_correoPaypal"
                 android:layout_width="259dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
@@ -299,7 +299,7 @@
                 android:hint="Correo"
                 android:includeFontPadding="false"
 
-                android:inputType="textPassword"
+                android:inputType="text"
 
                 android:paddingLeft="20dp"
 
@@ -309,7 +309,7 @@
                 android:textStyle="italic" />
 
             <EditText
-                android:id="@+id/txt_clave12"
+                android:id="@+id/txv_clavePaypal"
                 android:layout_width="259dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
@@ -336,7 +336,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txt_btn_confirmarPagoPaypal"
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:background="@drawable/boton_ver_habitacion"

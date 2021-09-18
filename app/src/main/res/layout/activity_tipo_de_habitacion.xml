@@ -254,7 +254,8 @@
                 android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/tv_img_perfil"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -269,6 +270,7 @@
             android:padding="5dp">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_listaTiposHabitaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </ScrollView>

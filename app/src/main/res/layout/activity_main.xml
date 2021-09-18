@@ -132,7 +132,7 @@
                 android:layout_height="14dp" />
 
             <EditText
-                android:id="@+id/txt_clave"
+                android:id="@+id/txt_correoPaypal"
                 android:layout_width="259dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
@@ -165,7 +165,7 @@
             >
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btn_IngresarAppFacebook"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -175,7 +175,7 @@
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btn_IngresarAppGoogle"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -200,7 +200,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_IngresarApp"
                 android:layout_width="136dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/X_verde_claro_como_sus_ojos"
@@ -220,7 +220,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_SalirApp"
                 android:layout_width="129dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -245,7 +245,7 @@
             android:layout_height="41dp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txt_btn_IrRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"

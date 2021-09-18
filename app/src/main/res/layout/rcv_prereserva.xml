@@ -8,7 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/img_habitacionPrereserva"
         android:layout_width="89dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -22,14 +22,14 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/txt_nombre_hotel2"
+            android:id="@+id/txt_tipoHabitacionPrereserva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre Hotel"
+            android:text="Tipo Habitacion"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txt_tipo_habitacion"
+            android:id="@+id/txt_numAdultosNinosHabitacionPrereserva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="habitacion, adultos"
@@ -37,7 +37,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/txt_adultos"
+            android:id="@+id/txt_numAdultosNinosCamasPrereserva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="adultos,camas"
@@ -45,7 +45,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/txt_fecha_entr_sal"
+            android:id="@+id/txt_fechaEntrSalPrereserva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="fechaEntradaSalida"
@@ -56,7 +56,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txt_precio"
+        android:id="@+id/txt_precioPrereserva"
         android:layout_width="81dp"
         android:layout_height="match_parent"
         android:includeFontPadding="false"
@@ -75,6 +75,7 @@
 
         <ImageView
             android:id="@+id/img_btn_editarHabitacion"
+            android:clickable="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
@@ -87,6 +88,7 @@
 
         <ImageView
             android:id="@+id/img_btn_eliminarHabitacion"
+            android:clickable="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"

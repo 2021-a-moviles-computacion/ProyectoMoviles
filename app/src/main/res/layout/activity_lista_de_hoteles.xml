@@ -252,7 +252,8 @@
                 android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/tv_img_perfil"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -267,12 +268,13 @@
             android:padding="5dp">
 
             <SearchView
+                android:id="@+id/srv_buscarHotel"
                 android:layout_width="319dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/rounded_border_txt" />
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/img_btn_FiltrosHotel"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

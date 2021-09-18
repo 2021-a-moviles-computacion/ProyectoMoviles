@@ -256,7 +256,8 @@
                 android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/tv_img_perfil"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -274,6 +275,7 @@
                 android:layout_height="562dp">
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_listaPrereserva"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </ScrollView>
@@ -295,7 +297,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView29"
+                    android:id="@+id/txv_precioTotalPrereserva"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -307,13 +309,13 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tv_btn_hacerReservar"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
                 android:background="@drawable/boton_ver_habitacion"
                 android:clickable="true"
                 android:gravity="center"
-                android:text="Añadir Habitación(es)"
+                android:text="Seleccionar forma de pago"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
