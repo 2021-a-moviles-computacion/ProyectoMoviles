@@ -17,6 +17,7 @@ class ListaDeHoteles : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_de_hoteles)
+
         val menuLateral=findViewById<NavigationView>(R.id.nv_menu_lateral)
         menuLateral.visibility=NavigationView.INVISIBLE
         auth = Firebase.auth
@@ -28,6 +29,18 @@ class ListaDeHoteles : AppCompatActivity() {
             }else{
                 menuLateral.visibility=NavigationView.INVISIBLE
             }
+        }
+
+        val botonPerfilIcon=findViewById<ImageView>(R.id.tv_img_perfil)
+        botonPerfilIcon.setOnClickListener{
+            menuLateral.visibility=NavigationView.INVISIBLE
+            startActivity(Intent(this,Perfil::class.java))
+        }
+
+        val botonPerfil = findViewById<TextView>(R.id.tv_btn_perfil)
+        botonPerfil.setOnClickListener {
+            menuLateral.visibility=NavigationView.INVISIBLE
+            startActivity(Intent(this,Perfil::class.java))
         }
 
         val botonFavoritos= findViewById<TextView>(R.id.tv_btn_favoritos)

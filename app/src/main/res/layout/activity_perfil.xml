@@ -256,10 +256,10 @@
 
             <ImageView
                 android:id="@+id/tv_img_perfil"
-                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
                 app:srcCompat="@drawable/ic_baseline_person_24" />
 
         </LinearLayout>
