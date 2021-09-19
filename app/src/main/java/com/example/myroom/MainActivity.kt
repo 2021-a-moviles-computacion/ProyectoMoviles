@@ -66,28 +66,37 @@ class MainActivity : AppCompatActivity() {
 
         val botonIniciarSession= findViewById<Button>(R.id.btn_IngresarApp)
         botonIniciarSession.setOnClickListener {
-            auth.signInWithEmailAndPassword(
-                findViewById<EditText>(R.id.txtUsuario).text.toString(),
-                findViewById<EditText>(R.id.txt_corroIniciarSession).text.toString(),
-            )
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Log.i("firebaseauth", "ususario iniciar session con Exito")
-                        //Toast.makeText(baseContext, ".",
-                        //Toast.LENGTH_SHORT).show()
-                        //val user = auth.currentUser
+            val correo = findViewById<EditText>(R.id.txtUsuario).text.toString()!!
+            val contrase = findViewById<EditText>(R.id.txt_corroIniciarSession).text.toString()!!
+            if (correo.length>0 && contrase.length>0  ){
+                auth.signInWithEmailAndPassword(
+                    correo,
+                    contrase,
+                )
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            Log.i("firebaseauth", "ususario iniciar session con Exito")
+                            //Toast.makeText(baseContext, ".",
+                            //Toast.LENGTH_SHORT).show()
+                            //val user = auth.currentUser
 
-                        startActivity(Intent(this, ListaDeHoteles::class.java))
-                        finish()
-                    } else {
-                        Log.i("firebaseauth", "Error ${task.exception}")
-                        Toast.makeText(
-                            baseContext, "Falla de Autenticacion.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            startActivity(Intent(this, ListaDeHoteles::class.java))
+                            finish()
+                        } else {
+                            Log.i("firebaseauth", "Error ${task.exception}")
+                            Toast.makeText(
+                                baseContext, "Falla de Autenticacion.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
-                }
-
+            }
+            else{
+                Toast.makeText(
+                    baseContext, "Campos vacios.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
     public override fun onStart() {
