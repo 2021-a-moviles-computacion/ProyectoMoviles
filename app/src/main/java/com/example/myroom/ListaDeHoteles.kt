@@ -5,16 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ListaDeHoteles : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_de_hoteles)
         val menuLateral=findViewById<NavigationView>(R.id.nv_menu_lateral)
         menuLateral.visibility=NavigationView.INVISIBLE
-
+        auth = Firebase.auth
 
         val botonAbrirYcerrarMenu= findViewById<ImageView>(R.id.img_btn_menulateral)
         botonAbrirYcerrarMenu.setOnClickListener{
@@ -29,6 +34,40 @@ class ListaDeHoteles : AppCompatActivity() {
         botonFavoritos.setOnClickListener {
             menuLateral.visibility=NavigationView.INVISIBLE
             startActivity(Intent(this,Favoritos::class.java))
+        }
+        val botonReservar= findViewById<TextView>(R.id.tv_btn_reservar)
+        botonReservar.setOnClickListener {
+            menuLateral.visibility=NavigationView.INVISIBLE
+            startActivity(Intent(this,PreReserva::class.java))
+        }
+        val botonMisReservas= findViewById<TextView>(R.id.tv_btn_mis_reservas)
+        botonMisReservas.setOnClickListener {
+            menuLateral.visibility=NavigationView.INVISIBLE
+            startActivity(Intent(this,MisReservas::class.java))
+        }
+        val botonAyuda= findViewById<TextView>(R.id.tv_btn_ayuda)
+        botonAyuda.setOnClickListener {
+            menuLateral.visibility=NavigationView.INVISIBLE
+            Toast.makeText(
+                baseContext, "NO ESTA DISPONIBLE EN LA VERSION ACTUAL.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        val botonConfiguracion= findViewById<TextView>(R.id.tv_btn_configuracion)
+        botonConfiguracion.setOnClickListener {
+            menuLateral.visibility=NavigationView.INVISIBLE
+            Toast.makeText(
+                baseContext, "NO ESTA DISPONIBLE EN LA VERSION ACTUAL.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        val botonCerrarSession= findViewById<TextView>(R.id.tv_btn_cerrar_session)
+        botonCerrarSession.setOnClickListener {
+            menuLateral.visibility=NavigationView.INVISIBLE
+            auth.signOut()
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
         }
 
 

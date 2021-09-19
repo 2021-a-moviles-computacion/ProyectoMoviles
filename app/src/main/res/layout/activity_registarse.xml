@@ -326,7 +326,7 @@
             android:layout_height="28dp" />
 
         <TextView
-            android:id="@+id/txt_btn_IrRegistrarse"
+            android:id="@+id/txt_btn_IrInicioSession"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"

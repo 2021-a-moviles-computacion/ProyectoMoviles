@@ -132,7 +132,7 @@
                 android:layout_height="14dp" />
 
             <EditText
-                android:id="@+id/txt_correoPaypal"
+                android:id="@+id/txt_corroIniciarSession"
                 android:layout_width="259dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"

@@ -7,7 +7,7 @@
     android:background="@drawable/gradiente_linear"
     tools:context=".PagoConTarjeta">
 
-    <!--
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_menu_lateral"
         android:layout_width="0dp"
@@ -215,7 +215,6 @@
         </LinearLayout>
 
     </com.google.android.material.navigation.NavigationView>
--->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
