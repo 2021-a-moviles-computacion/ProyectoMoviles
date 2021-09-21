@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.login.LoginManager
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -79,6 +80,7 @@ class ListaDeHoteles : AppCompatActivity() {
         botonCerrarSession.setOnClickListener {
             menuLateral.visibility=NavigationView.INVISIBLE
             auth.signOut()
+            LoginManager.getInstance().logOut()
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         }

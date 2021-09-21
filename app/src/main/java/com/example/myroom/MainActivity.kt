@@ -8,19 +8,28 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
 
 
 class MainActivity : AppCompatActivity() {
+
+
+    val callbackManager = CallbackManager.Factory.create();
 
     private lateinit var auth: FirebaseAuth
     val CODIGO_GOOGLE_SIGN_IN = 600
@@ -31,6 +40,50 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Para facebook
+
+
+        //LoginManager.getInstance().logOut()
+        val botonIngresar=findViewById<Button>(R.id.btn_IngresarAppFacebook)
+
+        botonIngresar.setOnClickListener{
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
+
+            Log.i("facebook","hice clik")
+            LoginManager.getInstance().registerCallback(callbackManager,
+                object : FacebookCallback<LoginResult?> {
+                    override fun onSuccess(loginResult: LoginResult?) {
+                        loginResult?.let {
+                            Log.i("facebook","token ${it.accessToken}")
+                            val token=it.accessToken
+                            val credential=FacebookAuthProvider.getCredential(token.token)
+                            FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
+                                if(it.isSuccessful){
+                                    Log.i("firebaseauth", "ususario iniciar session con Exito con facebook")
+                                    LoginManager.getInstance().logOut()
+                                    funcionAbrirXD()
+                                    finish()
+                                } else {
+                                    Log.i("firebaseauth", "Error ${it.exception}")
+                                    Toast.makeText(
+                                        baseContext, "Falla de Autenticacion.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onCancel() {
+                        Log.i("facebook","cancelo")
+                    }
+
+                    override fun onError(exception: FacebookException) {
+                        Log.i("facebook","error :${exception.message}")
+                    }
+                })
+            LoginManager.getInstance().logOut()
+        }
 
 
         val botonIniciarSessionGoogle = findViewById<Button>(R.id.btn_IngresarAppGoogle)
@@ -112,6 +165,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode,resultCode,data)
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==CODIGO_GOOGLE_SIGN_IN){
             try {
@@ -130,7 +184,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    fun funcionAbrirXD(){
+        startActivity(Intent(this, ListaDeHoteles::class.java))
+    }
 
 
 
