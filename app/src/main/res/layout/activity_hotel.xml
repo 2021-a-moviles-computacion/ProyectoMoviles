@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradiente_linear"
     tools:context=".Hotel">
-
+<!--
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_menu_lateral"
         android:layout_width="0dp"
@@ -214,7 +214,7 @@
         </LinearLayout>
 
     </com.google.android.material.navigation.NavigationView>
-
+-->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -270,7 +270,7 @@
             <ScrollView
                 android:id="@+id/scroll"
                 android:layout_width="match_parent"
-                android:layout_height="664dp"
+                android:layout_height="632dp"
                 android:padding="5dp">
 
                 <LinearLayout
@@ -358,10 +358,10 @@
             <TextView
                 android:id="@+id/tv_btn_VerHabitacionesHotel"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
+                android:layout_height="59dp"
                 android:background="@drawable/boton_ver_habitacion"
-                android:gravity="center"
                 android:clickable="true"
+                android:gravity="center"
                 android:text="Ver Habitaciones"
                 android:textAlignment="center"
                 android:textColor="@color/white"

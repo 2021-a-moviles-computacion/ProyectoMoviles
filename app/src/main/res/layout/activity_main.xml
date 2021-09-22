@@ -117,7 +117,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/rounded_border_txt"
                 android:ems="10"
-                android:hint="Usuario o Correo"
+                android:hint="Correo"
 
                 android:includeFontPadding="false"
 
