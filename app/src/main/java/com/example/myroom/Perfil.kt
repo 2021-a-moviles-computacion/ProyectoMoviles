@@ -1,12 +1,18 @@
 package com.example.myroom
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
 import android.util.Log
 import android.widget.*
 import android.widget.TextView.*
+import androidx.core.view.isVisible
 
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -14,12 +20,19 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
+import java.util.jar.Manifest
 
 class Perfil : AppCompatActivity() {
 
-
+    var storage = Firebase.storage.reference
     private lateinit var auth: FirebaseAuth
     val db =Firebase.firestore
+    //lateinit var imageUri: Uri
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
@@ -29,7 +42,41 @@ class Perfil : AppCompatActivity() {
         auth = Firebase.auth
 
 
+        val fileName=auth.currentUser!!.uid +".jpg"
+        val userReference=storage.child("FotoPerfil/"+fileName)
 
+
+        val fotoPerfil = findViewById<ImageView>(R.id.img_perfil)
+        userReference.getBytes(1024*1024*3).addOnSuccessListener {
+            if(it!=null){
+                fotoPerfil.setImageBitmap(BitmapFactory.decodeByteArray(it,0,it.size))
+                fotoPerfil.isVisible= true
+            }
+
+        }.addOnFailureListener {
+            fotoPerfil.isVisible= true
+            Toast.makeText(this,"No se descargo la imagen de perfil",Toast.LENGTH_SHORT).show()
+        }
+
+
+
+
+        fotoPerfil.setOnClickListener {
+            if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_DENIED){
+                val permission= arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                requestPermissions(permission,PERMISSION_CODE)
+            }else{
+                pickImageFromGalery()
+
+
+                //fotoPerfil.setImageURI(imageUri)
+
+
+            }
+
+
+
+        }
         val textoaceptar = switchEnable()
 
         val botonEditar=findViewById<TextView>(R.id.txt_btn_editar_perfil)
@@ -52,6 +99,22 @@ class Perfil : AppCompatActivity() {
                         ).show()
                     }.addOnFailureListener {
                         Log.i("firestore", "Error ${it.toString()}")
+                    }
+                fotoPerfil.isDrawingCacheEnabled=true
+                fotoPerfil.buildDrawingCache()
+                val bitmap = (fotoPerfil.drawable as BitmapDrawable).bitmap
+                val baos = ByteArrayOutputStream()
+                bitmap .compress(Bitmap.CompressFormat.JPEG,100,baos)
+                val data = baos.toByteArray()
+                userReference.putBytes(data)
+                    .addOnSuccessListener {
+                        Log.i("storage","foto registrada")
+                    }
+                    .addOnFailureListener{
+                        Toast.makeText(
+                            baseContext, "Error subiendo la foto",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             }
 
@@ -140,6 +203,18 @@ class Perfil : AppCompatActivity() {
 
     }
 
+    private fun pickImageFromGalery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type="image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    companion object{
+        private val IMAGE_PICK_CODE = 100
+        private val PERMISSION_CODE =100
+
+    }
+
     private fun switchEnable():String {
         if(findViewById<TextView>(R.id.txt_perfil_genero).isEnabled){
             findViewById<TextView>(R.id.txt_perfil_lugares_visitados).isEnabled=false
@@ -148,6 +223,7 @@ class Perfil : AppCompatActivity() {
             findViewById<TextView>(R.id.txt_perfil_descripcion_personal).isEnabled=false
             findViewById<TextView>(R.id.txt_perfil_nacionalidad).isEnabled=false
             findViewById<TextView>(R.id.txt_btn_cancelar_editar_perfil).visibility= INVISIBLE
+            findViewById<ImageView>(R.id.img_perfil).isClickable=false
             return "Editar"
 
 
@@ -158,8 +234,35 @@ class Perfil : AppCompatActivity() {
             findViewById<TextView>(R.id.txt_perfil_descripcion_personal).isEnabled=true
             findViewById<TextView>(R.id.txt_perfil_nacionalidad).isEnabled=true
             findViewById<TextView>(R.id.txt_btn_cancelar_editar_perfil).visibility= VISIBLE
+            findViewById<ImageView>(R.id.img_perfil).isClickable=true
             return "Guardar"
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+            if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK && data!!.data!=null){
+                findViewById<ImageView>(R.id.img_perfil).setImageURI(data.data)
+                //imageUri = data.data!!
+
+            }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode){
+            PERMISSION_CODE->{
+                if(grantResults.size>0&& grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    pickImageFromGalery()
+                }else{
+                    Toast.makeText(this,"permiso denegado",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }
