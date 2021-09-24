@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 class HotelHabitacion (
-
+    var id: String?=null,
     var nombreHotel: String?=null,
     var direccion: String?=null,
     var puntuacion: String?=null,

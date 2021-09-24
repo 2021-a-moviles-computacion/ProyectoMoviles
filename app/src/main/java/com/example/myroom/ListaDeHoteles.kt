@@ -32,7 +32,11 @@ class ListaDeHoteles : AppCompatActivity() {
         val list= arrayListOf<HotelHabitacion>()
 
         val recyclerView=findViewById<RecyclerView>(R.id.rv_hotel)
-        val adapter=Rcv_lista_hoteles(ListaDeHoteles::class.java,recyclerView,list)
+        recyclerView.setOnClickListener{
+
+        }
+
+        val adapter=Rcv_lista_hoteles(this,recyclerView,list)
         db.collection("HotelHabitacion").get()
             .addOnSuccessListener {
                 Log.i("firebase","consulta Lista HotelHabitacion")
@@ -42,6 +46,7 @@ class ListaDeHoteles : AppCompatActivity() {
                     Log.i("storage","consulta imagen HotelHabitacion")
                     list.add(
                         HotelHabitacion(
+                            hotelHabitacion.id.toString(),
                             hotelHabitacion.getString("nombreHotel"),
                             hotelHabitacion.getString("direccion"),
                             hotelHabitacion.getString("puntuacion"),
