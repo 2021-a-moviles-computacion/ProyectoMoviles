@@ -75,6 +75,7 @@ class Rcv_lista_hoteles(
             Log.i("recyclerVierw","Seselecciono el item ${holder.id}")
             val intent=Intent(context,Hotel::class.java)
             intent.putExtra("id","${holder.id}")
+
             context.startActivity(intent)
 
         }

@@ -28,10 +28,11 @@ class TipoDeHabitacion : AppCompatActivity() {
         auth = Firebase.auth
 
         val idHotel= intent.getStringExtra("idHotel")
+        val nombreHotel=intent.getStringExtra("nombreHotel")
 
         val listaTipoDeHabitacion = ArrayList<Habitaciones>()
         val recyclerViewTipoDeHabitacion= findViewById<RecyclerView>(R.id.rv_listaTiposHabitaciones)
-        val adapter= Rcv_Habitaciones(this,recyclerViewTipoDeHabitacion,listaTipoDeHabitacion)
+        val adapter= Rcv_Habitaciones(this,recyclerViewTipoDeHabitacion,listaTipoDeHabitacion,nombreHotel!!)
 
 
 
@@ -42,7 +43,7 @@ class TipoDeHabitacion : AppCompatActivity() {
                         Habitaciones(
                             habitacion.id.toString(),
                             habitacion.getString("idHotel"),
-                            habitacion.getString("nombre"),
+                            habitacion.getString("nombreHotel"),
                             habitacion.getDouble("numCamas")!!.toInt(),
                             habitacion.getDouble("numHabitaciones")!!.toInt(),
                             habitacion.getDouble("numMinAdultos")!!.toInt(),

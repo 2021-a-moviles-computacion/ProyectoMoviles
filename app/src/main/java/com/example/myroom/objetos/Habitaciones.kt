@@ -3,6 +3,7 @@ package com.example.myroom.objetos
 class Habitaciones (
     var id:String?=null,
     var idHotel:String?=null,
+   // var nombreHotel:String?=null,
     var nombre:String?=null,
     var numeroCamas:Int?=null,
     var numeroHabitaciones:Int?,

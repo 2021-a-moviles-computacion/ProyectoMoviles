@@ -166,6 +166,7 @@ class Hotel : AppCompatActivity() {
 
             val intent = Intent(this, TipoDeHabitacion::class.java)
             intent.putExtra("idHotel", "${idHotel}")
+            intent.putExtra("nombreHotel","${findViewById<TextView>(R.id.txv_NombreHotel).text.toString()}")
             startActivity(intent)
         }
 

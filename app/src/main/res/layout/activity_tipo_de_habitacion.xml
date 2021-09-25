@@ -262,12 +262,28 @@
                 app:srcCompat="@drawable/ic_baseline_person_24" />
         </LinearLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_listaTiposHabitaciones"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="662dp">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_listaTiposHabitaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/tv_btn_Ir_Prereserva"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/boton_ver_habitacion"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Ir a la Reserva Actual"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
