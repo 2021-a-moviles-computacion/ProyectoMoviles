@@ -263,17 +263,10 @@
         </LinearLayout>
 
 
-        <ScrollView
-            android:id="@+id/scroll"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_listaTiposHabitaciones"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_listaTiposHabitaciones"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

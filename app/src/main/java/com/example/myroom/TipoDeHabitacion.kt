@@ -1,17 +1,24 @@
 package com.example.myroom
 
 import android.content.Intent
+import android.content.ReceiverCallNotAllowedException
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myroom.objetos.Habitaciones
+import com.example.myroom.recyclerview.Rcv_Habitaciones
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class TipoDeHabitacion : AppCompatActivity() {
+    val db = Firebase.firestore
+
     private lateinit var auth:FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +26,44 @@ class TipoDeHabitacion : AppCompatActivity() {
         val menuLateral=findViewById<NavigationView>(R.id.nv_menu_lateral)
         menuLateral.visibility= NavigationView.INVISIBLE
         auth = Firebase.auth
+
+        val idHotel= intent.getStringExtra("idHotel")
+
+        val listaTipoDeHabitacion = ArrayList<Habitaciones>()
+        val recyclerViewTipoDeHabitacion= findViewById<RecyclerView>(R.id.rv_listaTiposHabitaciones)
+        val adapter= Rcv_Habitaciones(this,recyclerViewTipoDeHabitacion,listaTipoDeHabitacion)
+
+
+
+        db.collection("TipoHabitacion").whereEqualTo("idHotel","${idHotel}").get()
+            .addOnSuccessListener {
+                for (habitacion in it){
+                    listaTipoDeHabitacion.add(
+                        Habitaciones(
+                            habitacion.id.toString(),
+                            habitacion.getString("idHotel"),
+                            habitacion.getString("nombre"),
+                            habitacion.getDouble("numCamas")!!.toInt(),
+                            habitacion.getDouble("numHabitaciones")!!.toInt(),
+                            habitacion.getDouble("numMinAdultos")!!.toInt(),
+                            habitacion.getDouble("numMaxAdultos")!!.toInt(),
+                            habitacion.getDouble("numMaxNinios")!!.toInt(),
+                            habitacion.getDouble("precioNinio"),
+                            habitacion.getDouble("precioAdulto"),
+                            habitacion.getDouble("precioInicial"),
+
+                            habitacion.data["servicios"] as ArrayList<String>?
+
+                            )
+
+                    )
+                }
+                recyclerViewTipoDeHabitacion.adapter=adapter
+                recyclerViewTipoDeHabitacion.itemAnimator=androidx.recyclerview.widget.DefaultItemAnimator()
+                recyclerViewTipoDeHabitacion.layoutManager=androidx.recyclerview.widget.LinearLayoutManager(this)
+                adapter.notifyDataSetChanged()
+
+            }
 
         val botonAbrirYcerrarMenu= findViewById<ImageView>(R.id.img_btn_menulateral)
         botonAbrirYcerrarMenu.setOnClickListener{

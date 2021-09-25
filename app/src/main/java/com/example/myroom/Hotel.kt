@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myroom.objetos.Habitaciones
 import com.example.myroom.recyclerview.Rcv_Imagenes_Horizontales
 import com.example.myroom.recyclerview.Rcv_lista_hoteles
 import com.example.myroom.recyclerview.Rcv_metodos_pago
@@ -23,22 +24,22 @@ import com.google.firebase.storage.ktx.storage
 
 class Hotel : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    val db =Firebase.firestore
+    val db = Firebase.firestore
 
-    val ref= Firebase.storage.reference
+    val ref = Firebase.storage.reference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel)
-        val menuLateral=findViewById<NavigationView>(R.id.nv_menu_lateral)
-        menuLateral.visibility= NavigationView.INVISIBLE
+        val menuLateral = findViewById<NavigationView>(R.id.nv_menu_lateral)
+        menuLateral.visibility = NavigationView.INVISIBLE
         auth = Firebase.auth
-        val listaImagenes=arrayListOf<ByteArray>()
-        val idHotel=intent.getStringExtra("id")
-        val recyclerViewImagenesHotel=findViewById<RecyclerView>(R.id.rv_fotosHotel)
+        val listaImagenes = arrayListOf<ByteArray>()
+        val idHotel = intent.getStringExtra("id")
+        val recyclerViewImagenesHotel = findViewById<RecyclerView>(R.id.rv_fotosHotel)
 
-        val adapter= Rcv_Imagenes_Horizontales(this,recyclerViewImagenesHotel,listaImagenes)
+        val adapter = Rcv_Imagenes_Horizontales(this, recyclerViewImagenesHotel, listaImagenes)
 
-        val hotelHabitacionReference=ref.child("Hoteles/"+idHotel.toString())
+        val hotelHabitacionReference = ref.child("Hoteles/" + idHotel.toString())
         hotelHabitacionReference.listAll()
             .addOnSuccessListener {
 
@@ -46,133 +47,186 @@ class Hotel : AppCompatActivity() {
                     imagenItem.getBytes(1024 * 1024 * 3).addOnSuccessListener { imagen ->
                         Log.i("storage", "consulta imagen 555HotelHabitacion")
                         listaImagenes.add(imagen)
-                        recyclerViewImagenesHotel.adapter=adapter
-                        recyclerViewImagenesHotel.itemAnimator=androidx.recyclerview.widget.DefaultItemAnimator()
+                        recyclerViewImagenesHotel.adapter = adapter
+                        recyclerViewImagenesHotel.itemAnimator =
+                            androidx.recyclerview.widget.DefaultItemAnimator()
                         //recyclerViewImagenesHotel.layoutManager=androidx.recyclerview.widget.LinearLayoutManager(this)
 
-                        recyclerViewImagenesHotel.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+                        recyclerViewImagenesHotel.layoutManager =
+                            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
                         adapter.notifyDataSetChanged()
                     }
-                        .addOnFailureListener{
-                            Log.i("recyclerView","error ${it.message}")
+                        .addOnFailureListener {
+                            Log.i("recyclerView", "error ${it.message}")
                         }
                 }
 
-        }
-        val recyclerViewIzquierda=findViewById<RecyclerView>(R.id.rv_servicios1)
-        val recyclerViewDerecha=findViewById<RecyclerView>(R.id.rv_servicios2)
-        val recyclerMetodoPago=findViewById<RecyclerView>(R.id.rv_metodoDePago_hotel)
+            }
+        val recyclerViewIzquierda = findViewById<RecyclerView>(R.id.rv_servicios1)
+        val recyclerViewDerecha = findViewById<RecyclerView>(R.id.rv_servicios2)
+        val recyclerMetodoPago = findViewById<RecyclerView>(R.id.rv_metodoDePago_hotel)
         val listaIzquierza = arrayListOf<String>()
         val listaderecha = arrayListOf<String>()
-        val listaMetodos=arrayListOf<String>()
-        val adapterRVIz=Rcv_servicios(this,recyclerViewIzquierda,listaIzquierza)
-        val adapterRVDer=Rcv_servicios(this,recyclerViewDerecha,listaderecha)
-        val adapterRVMet=Rcv_metodos_pago(this,recyclerMetodoPago,listaMetodos)
+        val listaMetodos = arrayListOf<String>()
+        val adapterRVIz = Rcv_servicios(this, recyclerViewIzquierda, listaIzquierza)
+        val adapterRVDer = Rcv_servicios(this, recyclerViewDerecha, listaderecha)
+        val adapterRVMet = Rcv_metodos_pago(this, recyclerMetodoPago, listaMetodos)
 
         db.collection("Hotel").document("${idHotel}").get()
             .addOnSuccessListener {
 
 
-                var hashMetodos : HashMap<String,Any> = it.data!!.get("metodosDePago") as HashMap<String, Any>
-                findViewById<TextView>(R.id.txv_NombreHotel).text=it.getString("nombre")
-                val servicios=it.data!!.get("servicios")
+                var hashMetodos: HashMap<String, Any> =
+                    it.data!!.get("metodosDePago") as HashMap<String, Any>
+                findViewById<TextView>(R.id.txv_NombreHotel).text = it.getString("nombre")
+                val servicios = it.data!!.get("servicios")
 
-                var count=0
+                var count = 0
                 (servicios as ArrayList<String>).forEach {
-                    if (count % 2 == 0){
+                    if (count % 2 == 0) {
                         listaIzquierza.add(it)
                         count++
-                    }else{
+                    } else {
                         listaderecha.add(it)
                         count++
                     }
                 }
 
-                if(hashMetodos  ["pagoConTarjeta"]==true){
+                if (hashMetodos["pagoConTarjeta"] == true) {
                     listaMetodos.add("Se acepta pago con Tarjeta")
                 }
-                if(hashMetodos["pagoConPayPal"]==true){
+                if (hashMetodos["pagoConPayPal"] == true) {
                     listaMetodos.add("Se acepta pago con PayPal")
                 }
-                if(hashMetodos["pagoEnHotel"]==true){
+                if (hashMetodos["pagoEnHotel"] == true) {
                     listaMetodos.add("Se acepta pago en el Hotel")
                 }
-                recyclerViewIzquierda.adapter=adapterRVIz
-                recyclerViewIzquierda.itemAnimator=androidx.recyclerview.widget.DefaultItemAnimator()
-                recyclerViewIzquierda.layoutManager=androidx.recyclerview.widget.LinearLayoutManager(this)
+                recyclerViewIzquierda.adapter = adapterRVIz
+                recyclerViewIzquierda.itemAnimator =
+                    androidx.recyclerview.widget.DefaultItemAnimator()
+                recyclerViewIzquierda.layoutManager =
+                    androidx.recyclerview.widget.LinearLayoutManager(this)
                 adapterRVIz.notifyDataSetChanged()
 
-                recyclerViewDerecha.adapter=adapterRVDer
-                recyclerViewDerecha.itemAnimator=androidx.recyclerview.widget.DefaultItemAnimator()
-                recyclerViewDerecha.layoutManager=androidx.recyclerview.widget.LinearLayoutManager(this)
+                recyclerViewDerecha.adapter = adapterRVDer
+                recyclerViewDerecha.itemAnimator =
+                    androidx.recyclerview.widget.DefaultItemAnimator()
+                recyclerViewDerecha.layoutManager =
+                    androidx.recyclerview.widget.LinearLayoutManager(this)
                 adapterRVDer.notifyDataSetChanged()
 
-                recyclerMetodoPago.adapter=adapterRVMet
-                recyclerMetodoPago.itemAnimator=androidx.recyclerview.widget.DefaultItemAnimator()
-                recyclerMetodoPago.layoutManager=androidx.recyclerview.widget.LinearLayoutManager(this)
+                recyclerMetodoPago.adapter = adapterRVMet
+                recyclerMetodoPago.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+                recyclerMetodoPago.layoutManager =
+                    androidx.recyclerview.widget.LinearLayoutManager(this)
                 adapterRVMet.notifyDataSetChanged()
             }
 
+        val botonIrTipoDeHabitacion = findViewById<TextView>(R.id.tv_btn_VerHabitacionesHotel)
+        botonIrTipoDeHabitacion.setOnClickListener {
+            /*
+            val ref1 = Firebase.storage.reference
+            val ImagenesTiposHabitacion = ArrayList<ArrayList<ByteArray>>()
+            db.collection("TipoHabitacion").whereEqualTo("idHotel", "${idHotel}").get()
+                .addOnSuccessListener {
+                    for (a in it) {
+                        Log.i("Lists", "${a.id}")
+                        val nose = ref1.child("TiposHabitaciones/" + a.id.toString())
+                        nose.listAll()
+                            .addOnSuccessListener { listita ->
+                                Log.i("ListsAAAA", "${listita.prefixes}")
+                                val listaUnTipo = ArrayList<ByteArray>()
+                                listita.items.forEach { imagen ->
 
 
-        val botonAbrirYcerrarMenu= findViewById<ImageView>(R.id.img_btn_menulateral)
-        botonAbrirYcerrarMenu.setOnClickListener{
-            if (menuLateral.visibility== NavigationView.INVISIBLE){
-                menuLateral.visibility= NavigationView.VISIBLE
-            }else{
-                menuLateral.visibility= NavigationView.INVISIBLE
+                                    listaUnTipo.add(
+                                        imagen.getBytes(1024 * 1024 * 3).addOnSuccessListener {
+                                            Log.i("ListsBBBB", "exito")
+                                        }.result
+                                    )
+
+
+                                }
+                                ImagenesTiposHabitacion.add(listaUnTipo)
+                                Log.i("Listsi", "${ImagenesTiposHabitacion.size}")
+                            }
+                            .addOnFailureListener {
+                                Log.i("Error Lista", "${it.message}")
+                            }
+                            .addOnCompleteListener {
+                                Log.i("Error Lista", "${it.result}")
+                            }
+
+                    }
+
+                    Log.i("Listso", "${ImagenesTiposHabitacion.size}")
+
+                }
+*/
+
+            val intent = Intent(this, TipoDeHabitacion::class.java)
+            intent.putExtra("idHotel", "${idHotel}")
+            startActivity(intent)
+        }
+
+        val botonAbrirYcerrarMenu = findViewById<ImageView>(R.id.img_btn_menulateral)
+        botonAbrirYcerrarMenu.setOnClickListener {
+            if (menuLateral.visibility == NavigationView.INVISIBLE) {
+                menuLateral.visibility = NavigationView.VISIBLE
+            } else {
+                menuLateral.visibility = NavigationView.INVISIBLE
             }
         }
 
-        val botonPerfilIcon=findViewById<ImageView>(R.id.tv_img_perfil)
-        botonPerfilIcon.setOnClickListener{
-            menuLateral.visibility= NavigationView.INVISIBLE
-            startActivity(Intent(this,Perfil::class.java))
+        val botonPerfilIcon = findViewById<ImageView>(R.id.tv_img_perfil)
+        botonPerfilIcon.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this, Perfil::class.java))
         }
 
         val botonPerfil = findViewById<TextView>(R.id.tv_btn_perfil)
         botonPerfil.setOnClickListener {
-            menuLateral.visibility= NavigationView.INVISIBLE
-            startActivity(Intent(this,Perfil::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this, Perfil::class.java))
         }
 
-        val botonFavoritos= findViewById<TextView>(R.id.tv_btn_favoritos)
+        val botonFavoritos = findViewById<TextView>(R.id.tv_btn_favoritos)
         botonFavoritos.setOnClickListener {
-            menuLateral.visibility= NavigationView.INVISIBLE
-            startActivity(Intent(this,Favoritos::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this, Favoritos::class.java))
         }
-        val botonReservar= findViewById<TextView>(R.id.tv_btn_reservar)
+        val botonReservar = findViewById<TextView>(R.id.tv_btn_reservar)
         botonReservar.setOnClickListener {
-            menuLateral.visibility= NavigationView.INVISIBLE
-            startActivity(Intent(this,PreReserva::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this, PreReserva::class.java))
         }
-        val botonMisReservas= findViewById<TextView>(R.id.tv_btn_mis_reservas)
+        val botonMisReservas = findViewById<TextView>(R.id.tv_btn_mis_reservas)
         botonMisReservas.setOnClickListener {
-            menuLateral.visibility= NavigationView.INVISIBLE
-            startActivity(Intent(this,MisReservas::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this, MisReservas::class.java))
         }
-        val botonAyuda= findViewById<TextView>(R.id.tv_btn_ayuda)
+        val botonAyuda = findViewById<TextView>(R.id.tv_btn_ayuda)
         botonAyuda.setOnClickListener {
-            menuLateral.visibility= NavigationView.INVISIBLE
+            menuLateral.visibility = NavigationView.INVISIBLE
             Toast.makeText(
                 baseContext, "NO ESTA DISPONIBLE EN LA VERSION ACTUAL.",
                 Toast.LENGTH_SHORT
             ).show()
         }
-        val botonConfiguracion= findViewById<TextView>(R.id.tv_btn_configuracion)
+        val botonConfiguracion = findViewById<TextView>(R.id.tv_btn_configuracion)
         botonConfiguracion.setOnClickListener {
-            menuLateral.visibility= NavigationView.INVISIBLE
+            menuLateral.visibility = NavigationView.INVISIBLE
             Toast.makeText(
                 baseContext, "NO ESTA DISPONIBLE EN LA VERSION ACTUAL.",
                 Toast.LENGTH_SHORT
             ).show()
         }
 
-        val botonCerrarSession= findViewById<TextView>(R.id.tv_btn_cerrar_session)
+        val botonCerrarSession = findViewById<TextView>(R.id.tv_btn_cerrar_session)
         botonCerrarSession.setOnClickListener {
-            menuLateral.visibility= NavigationView.INVISIBLE
+            menuLateral.visibility = NavigationView.INVISIBLE
             auth.signOut()
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 

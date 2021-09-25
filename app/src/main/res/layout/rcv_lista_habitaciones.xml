@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="380dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="403dp"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradiente_linear"
+    >
 
 
-    <HorizontalScrollView
+    <ImageView
+        android:id="@+id/img_tipo_habitacion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_imagenesListaHabitaciones"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </HorizontalScrollView>
+        android:layout_height="253dp"
+        app:srcCompat="@drawable/ic_action_name" />
 
     <TextView
         android:id="@+id/txv_tipoHabitacionLista"
@@ -120,6 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/boton_negativo"
+            android:clickable="true"
             android:gravity="center"
             android:text="-" />
 
@@ -280,6 +280,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingLeft="14dp"
                     android:text="Fecha entrada:" />
 
                 <TextView
@@ -302,6 +303,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
+                    android:paddingLeft="14dp"
                     android:text="Fecha salida:" />
 
                 <TextView
@@ -328,10 +330,10 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/img_btn_AgregarHabitacion"
+        android:id="@+id/txt_btn_AgregarHabitacion"
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:background="@drawable/boton_ver_habitacion"
+        android:background="@drawable/boton_positivo"
         android:clickable="true"
         android:gravity="center"
         android:text="Añadir Habitación(es)"
