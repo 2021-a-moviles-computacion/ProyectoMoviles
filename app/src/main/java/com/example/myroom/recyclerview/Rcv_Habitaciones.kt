@@ -14,10 +14,12 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myroom.Hotel
+import com.example.myroom.PreReserva
 import com.example.myroom.R
 import com.example.myroom.TipoDeHabitacion
 import com.example.myroom.objetos.Habitaciones
 import com.example.myroom.objetos.HotelHabitacion
+import com.example.myroom.objetos.ReservaHabitacion
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -35,7 +37,8 @@ class Rcv_Habitaciones(
     private val context: Context,
     private val recyclerView: RecyclerView,
     private val list: ArrayList<Habitaciones>,
-    private val nombreHotel: String
+    private val nombreHotel: String,
+    private val idPreReserva: String
 ) : RecyclerView.Adapter<Rcv_Habitaciones.myViewHolder>() {
     inner class myViewHolder(view: View) : RecyclerView.ViewHolder(view),
         DatePickerDialog.OnDateSetListener {
@@ -110,7 +113,9 @@ class Rcv_Habitaciones(
             fechaSalida = view.findViewById(R.id.txt_fechaSalida)
             precioCalculado = view.findViewById(R.id.txt_PrecioHabitacion)
             botonAdd = view.findViewById(R.id.txt_btn_AgregarHabitacion)
-
+            if (idPreReserva != "no") {
+                botonAdd.text = "Guardar Cambios"
+            }
             btnMenosHabs = view.findViewById(R.id.txt_btn_menosNumHabitaciones)
             btnMasHabs = view.findViewById(R.id.txt_btn_masNumHabitaciones)
 
@@ -388,78 +393,124 @@ class Rcv_Habitaciones(
             }
         val auth = FirebaseAuth.getInstance()
         holder.botonAdd.setOnClickListener {
-            val db = Firebase.firestore
-            db.collection("ReservaCabecera")
-                .whereEqualTo("idUsuario", auth.uid.toString())
-                .whereEqualTo("idHotel", "${habitacion.idHotel}")
-                .whereEqualTo("estado", "abierta").get()
-                .addOnSuccessListener { Cabecera ->
+            if (idPreReserva == "no") {
+                val db = Firebase.firestore
+                db.collection("ReservaCabecera")
+                    .whereEqualTo("idUsuario", auth.uid.toString())
+                    .whereEqualTo("idHotel", "${habitacion.idHotel}")
+                    .whereEqualTo("estado", "abierta").get()
+                    .addOnSuccessListener { Cabecera ->
 
-                    if (Cabecera.size() != 0) {
-                        Log.i("firestore","Se entontro un documento abierto")
-                        db.collection("ReservaHabitacion")
-                            .add(
-                                hashMapOf(
-                                    "idUsuario" to auth.uid.toString(),
-                                    "idTipoDeHabitacion" to "${habitacion.id}",
-                                    "nombreTipoDeHabitacion" to "${habitacion.nombre}",
-                                    "numeroDeCamas" to habitacion.numeroCamas.toString().toInt(),
-                                    "numeroDeAdultos" to holder.numeroDeAdultosSeleccionado.text.toString()
-                                        .toInt(),
-                                    "numeroDeNin" to holder.numeroDeNinSeleccionado.text.toString()
-                                        .toInt(),
-                                    "numeroDeCuartos" to holder.numeroHabitacionesSeleccionadas.text.toString()
-                                        .toInt(),
-                                    "idReservaCabecera" to "${Cabecera.documents[0].id}",
-                                    "fechaEntada" to "${holder.fechaEntrada.text.toString()}",
-                                    "fechaSalida" to "${holder.fechaSalida.text}",
-                                    "numeroDeDias" to holder.diferenciaFechas,
-                                    "subtotal" to holder.total
-                                )
-                            ).addOnSuccessListener {
-                                Log.i("firestore", "Se creo una prereserva de una habitacion")
-                            }
+                        if (Cabecera.size() != 0) {
+                            Log.i("firestore", "Se entontro un documento abierto")
+                            db.collection("ReservaHabitacion")
+                                .add(
+                                    hashMapOf(
+                                        "idUsuario" to auth.uid.toString(),
+                                        "idTipoDeHabitacion" to "${habitacion.id}",
+                                        "nombreTipoDeHabitacion" to "${holder.nombre.text}",
+                                        "numeroDeCamas" to habitacion.numeroCamas.toString()
+                                            .toInt(),
+                                        "numeroDeAdultos" to holder.numeroDeAdultosSeleccionado.text.toString()
+                                            .toInt(),
+                                        "numeroDeNin" to holder.numeroDeNinSeleccionado.text.toString()
+                                            .toInt(),
+                                        "numeroDeCuartos" to holder.numeroHabitacionesSeleccionadas.text.toString()
+                                            .toInt(),
+                                        "idReservaCabecera" to "${Cabecera.documents[0].id}",
+                                        "fechaEntrada" to "${holder.fechaEntrada.text.toString()}",
+                                        "fechaSalida" to "${holder.fechaSalida.text}",
+                                        "numeroDeDias" to holder.diferenciaFechas,
+                                        "subtotal" to holder.total
+                                    )
+                                ).addOnSuccessListener {
+                                    Log.i("firestore", "Se creo una prereserva de una habitacion")
+                                    Toast.makeText(
+                                        context,
+                                        "Habitacion Registrada",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
 
-                    } else {
-                        db.collection("ReservaCabecera")
-                            .add(
-                                hashMapOf(
-                                    "idHotel" to "${habitacion.idHotel}",
-                                    "nombreHotel" to "${nombreHotel.toString()}",
-                                    "idUsuario" to "${auth.uid}",
-                                    "total" to holder.total,
-                                    "fechaEntradaSalida" to "${holder.fechaEntrada.text} - ${holder.fechaSalida.text}",
-                                    "estado" to "abierta",
-                                    "metodoDePago" to ""
-                                )
-                            ).addOnSuccessListener {
-                                Log.i("firestore","Reserva Creada")
-                                db.collection("ReservaHabitacion")
-                                    .add(
-                                        hashMapOf(
-                                            "idUsuario" to auth.uid.toString(),
-                                            "idTipoDeHabitacion" to "${habitacion.id}",
-                                            "nombreTipoDeHabitacion" to "${habitacion.nombre}",
-                                            "numeroDeCamas" to habitacion.numeroCamas.toString().toInt(),
-                                            "numeroDeAdultos" to holder.numeroDeAdultosSeleccionado.text.toString()
-                                                .toInt(),
-                                            "numeroDeNin" to holder.numeroDeNinSeleccionado.text.toString()
-                                                .toInt(),
-                                            "numeroDeCuartos" to holder.numeroHabitacionesSeleccionadas.text.toString()
-                                                .toInt(),
-                                            "idReservaCabecera" to "${it.id}",
-                                            "fechaEntada" to "${holder.fechaEntrada.text.toString()}",
-                                            "fechaSalida" to "${holder.fechaSalida.text}",
-                                            "numeroDeDias" to holder.diferenciaFechas,
-                                            "subtotal" to holder.total
-                                        )
-                                    ).addOnSuccessListener {
-                                            Log.i("firestore","PreReservaRegistrada")
+                                }
 
-                                    }
-                            }
+                        } else {
+                            db.collection("ReservaCabecera")
+                                .add(
+                                    hashMapOf(
+                                        "idHotel" to "${habitacion.idHotel}",
+                                        "nombreHotel" to "${nombreHotel.toString()}",
+                                        "idUsuario" to "${auth.uid}",
+                                        "total" to holder.total,
+                                        "fechaEntradaSalida" to "${holder.fechaEntrada.text} - ${holder.fechaSalida.text}",
+                                        "estado" to "abierta",
+                                        "metodoDePago" to ""
+                                    )
+                                ).addOnSuccessListener {
+                                    Log.i("firestore", "Reserva Creada")
+                                    db.collection("ReservaHabitacion")
+                                        .add(
+                                            hashMapOf(
+                                                "idUsuario" to auth.uid.toString(),
+                                                "idTipoDeHabitacion" to "${habitacion.id}",
+                                                "nombreTipoDeHabitacion" to "${holder.nombre.text.toString()}",
+                                                "numeroDeCamas" to habitacion.numeroCamas.toString()
+                                                    .toInt(),
+                                                "numeroDeAdultos" to holder.numeroDeAdultosSeleccionado.text.toString()
+                                                    .toInt(),
+                                                "numeroDeNin" to holder.numeroDeNinSeleccionado.text.toString()
+                                                    .toInt(),
+                                                "numeroDeCuartos" to holder.numeroHabitacionesSeleccionadas.text.toString()
+                                                    .toInt(),
+                                                "idReservaCabecera" to "${it.id}",
+                                                "fechaEntrada" to "${holder.fechaEntrada.text.toString()}",
+                                                "fechaSalida" to "${holder.fechaSalida.text}",
+                                                "numeroDeDias" to holder.diferenciaFechas,
+                                                "subtotal" to holder.total
+                                            )
+                                        ).addOnSuccessListener {
+                                            Log.i("firestore", "PreReservaRegistrada")
+                                            Toast.makeText(
+                                                context,
+                                                "Habitacion Registrada",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+
+                                        }
+                                }
+                        }
                     }
-                }
+            } else {
+                val db = Firebase.firestore
+                db.collection("ReservaHabitacion").document("${idPreReserva}")
+                    .update(
+
+
+
+
+
+                            "numeroDeAdultos", holder.numeroDeAdultosSeleccionado.text.toString()
+                                .toInt(),
+                            "numeroDeNin" , holder.numeroDeNinSeleccionado.text.toString()
+                                .toInt(),
+                            "numeroDeCuartos" , holder.numeroHabitacionesSeleccionadas.text.toString()
+                                .toInt(),
+
+                            "fechaEntada" ,"${holder.fechaEntrada.text.toString()}",
+                            "fechaSalida" ,"${holder.fechaSalida.text}",
+                            "numeroDeDias", holder.diferenciaFechas,
+                            "subtotal" , holder.total
+
+                    ).addOnSuccessListener {
+                        Log.i("firestore", "PreReserva Editada")
+                        Toast.makeText(
+                            context,
+                            "PrereservaEditada",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    }
+
+            }
 
         }
 

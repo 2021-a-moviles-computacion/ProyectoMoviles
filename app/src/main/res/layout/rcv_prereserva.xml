@@ -29,18 +29,18 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txt_numAdultosNinosHabitacionPrereserva"
+            android:id="@+id/txt_numHabitacionCamaPrereserva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="habitacion, adultos"
+            android:text="habitacion, camas"
             android:textAlignment="textStart"
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/txt_numAdultosNinosCamasPrereserva"
+            android:id="@+id/txt_numAdultosNinosPrereserva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="adultos,camas"
+            android:text="adultos,ninos"
             android:textAlignment="textStart"
             android:textSize="12sp" />
 

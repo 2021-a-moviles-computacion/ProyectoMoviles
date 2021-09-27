@@ -167,6 +167,7 @@ class Hotel : AppCompatActivity() {
             val intent = Intent(this, TipoDeHabitacion::class.java)
             intent.putExtra("idHotel", "${idHotel}")
             intent.putExtra("nombreHotel","${findViewById<TextView>(R.id.txv_NombreHotel).text.toString()}")
+            intent.putExtra("idPrereserva","no")
             startActivity(intent)
         }
 
@@ -199,7 +200,9 @@ class Hotel : AppCompatActivity() {
         val botonReservar = findViewById<TextView>(R.id.tv_btn_reservar)
         botonReservar.setOnClickListener {
             menuLateral.visibility = NavigationView.INVISIBLE
-            startActivity(Intent(this, PreReserva::class.java))
+            val intent =Intent(this,PreReserva::class.java)
+            intent.putExtra("estado","abierta")
+            startActivity(intent)
         }
         val botonMisReservas = findViewById<TextView>(R.id.tv_btn_mis_reservas)
         botonMisReservas.setOnClickListener {

@@ -111,7 +111,9 @@ class ListaDeHoteles : AppCompatActivity() {
         val botonReservar= findViewById<TextView>(R.id.tv_btn_reservar)
         botonReservar.setOnClickListener {
             menuLateral.visibility=NavigationView.INVISIBLE
-            startActivity(Intent(this,PreReserva::class.java))
+            val intent =Intent(this,PreReserva::class.java)
+            intent.putExtra("estado","abierta")
+            startActivity(intent)
         }
         val botonMisReservas= findViewById<TextView>(R.id.tv_btn_mis_reservas)
         botonMisReservas.setOnClickListener {
@@ -122,8 +124,8 @@ class ListaDeHoteles : AppCompatActivity() {
         botonAyuda.setOnClickListener {
 
             //insertarHoteles()
-            insertarTipoHabitacion()
-            insertarHoteHabitacion()
+           // insertarTipoHabitacion()
+            //insertarHoteHabitacion()
 
 
 

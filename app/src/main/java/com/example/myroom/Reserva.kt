@@ -50,7 +50,6 @@ class Reserva : AppCompatActivity() {
         val botonReservar= findViewById<TextView>(R.id.tv_btn_reservar)
         botonReservar.setOnClickListener {
             menuLateral.visibility= NavigationView.INVISIBLE
-            startActivity(Intent(this,PreReserva::class.java))
         }
         val botonMisReservas= findViewById<TextView>(R.id.tv_btn_mis_reservas)
         botonMisReservas.setOnClickListener {
