@@ -26,14 +26,14 @@
             android:padding="5dp">
 
             <ImageView
-                android:id="@+id/imageView11"
+                android:id="@+id/img_Logo"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_weight="0"
                 app:srcCompat="@drawable/ic_baseline_house_24" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/tv_slogan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -270,13 +270,13 @@
             <ScrollView
                 android:id="@+id/scroll"
                 android:layout_width="match_parent"
-                android:layout_height="668dp"
+                android:layout_height="664dp"
                 android:padding="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical">
 
 
@@ -340,24 +340,32 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/X_verde_claro_como_sus_ojos"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="10dp">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_servicios1"
-                            android:layout_width="178dp"
-                            android:layout_height="match_parent" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_servicios2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_metodoDePago_hotel"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal" />
 
                 </LinearLayout>
             </ScrollView>

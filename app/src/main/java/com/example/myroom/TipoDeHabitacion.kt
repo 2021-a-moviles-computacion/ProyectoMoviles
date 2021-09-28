@@ -45,6 +45,27 @@ class TipoDeHabitacion : AppCompatActivity() {
             idPrereserva!!
         )
 
+        val botonHomeHeader=findViewById<TextView>(R.id.Title)
+        botonHomeHeader.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+        val botonHomeMenu=findViewById<ImageView>(R.id.img_Logo)
+        botonHomeMenu.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+
+        val botonHomeSlogan=findViewById<TextView>(R.id.tv_slogan)
+        botonHomeSlogan.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            finish()
+        }
+
 
         if (idPrereserva.length < 3 ) {
             db.collection("TipoHabitacion").whereEqualTo("idHotel", "${idHotel}").get()

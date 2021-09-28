@@ -15,6 +15,7 @@ import android.widget.Toast
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myroom.Hotel
+import com.example.myroom.PreReserva
 
 import com.example.myroom.R
 import com.example.myroom.TipoDeHabitacion
@@ -64,6 +65,7 @@ class Rcv_prereserva (
         val db= Firebase.firestore
         val preReserva = list[position]
         holder.imagen.setImageBitmap(BitmapFactory.decodeByteArray(preReserva.imagen,0,preReserva.imagen!!.size))
+        holder.nombreTipo.text="${preReserva.nombreHabitacion}"
         holder.numHabitacionCamas.text="${preReserva.numeroDeCuartos} habitacion(es) | ${preReserva.numeroDeCamas} cama(s)"
         holder.numAdultosNinos.text=   "${preReserva.numeroDeAdultos} adulto(s)      | ${preReserva.numeroDeNinos} niño(s)"
         holder.entradaSalida.text="${preReserva.fechaEntrada} -- ${preReserva.fechaSalida}"
@@ -84,6 +86,9 @@ class Rcv_prereserva (
                 }.addOnFailureListener {
                   Toast.makeText(context,"Error eliminando",Toast.LENGTH_SHORT).show()
                 }
+            val intent=Intent(context,PreReserva::class.java)
+            intent.putExtra("estado","abierta")
+            context.startActivity(intent)
         }
         holder.editar.setOnClickListener {
             val intent = Intent(context,TipoDeHabitacion::class.java)

@@ -27,6 +27,27 @@ class PagoConPaypal : AppCompatActivity() {
 
         val idCabecera=intent.getStringExtra("idCabecera")
 
+        val botonHomeHeader=findViewById<TextView>(R.id.Title)
+        botonHomeHeader.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+        val botonHomeMenu=findViewById<ImageView>(R.id.img_Logo)
+        botonHomeMenu.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+
+        val botonHomeSlogan=findViewById<TextView>(R.id.tv_slogan)
+        botonHomeSlogan.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            finish()
+        }
+
         val botonConfirmar = findViewById<TextView>(R.id.txt_btn_confirmarPagoPaypal)
         botonConfirmar.setOnClickListener {
             val db = Firebase.firestore
@@ -66,18 +87,21 @@ class PagoConPaypal : AppCompatActivity() {
         botonPerfilIcon.setOnClickListener{
             menuLateral.visibility= NavigationView.INVISIBLE
             startActivity(Intent(this,Perfil::class.java))
+
         }
 
         val botonPerfil = findViewById<TextView>(R.id.tv_btn_perfil)
         botonPerfil.setOnClickListener {
             menuLateral.visibility= NavigationView.INVISIBLE
             startActivity(Intent(this,Perfil::class.java))
+
         }
 
         val botonFavoritos= findViewById<TextView>(R.id.tv_btn_favoritos)
         botonFavoritos.setOnClickListener {
             menuLateral.visibility= NavigationView.INVISIBLE
             startActivity(Intent(this,Favoritos::class.java))
+
         }
         val botonReservar= findViewById<TextView>(R.id.tv_btn_reservar)
         botonReservar.setOnClickListener {

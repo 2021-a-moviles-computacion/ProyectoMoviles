@@ -59,7 +59,7 @@ class Rcv_favorito_hotel (
         holder.imagen.setImageBitmap(BitmapFactory.decodeByteArray(Favorito.imagen,0,Favorito.imagen!!.size))
         holder.nombreHotel.text="${Favorito.titulo}"
         holder.Direccion.text="${Favorito.campo1}"
-        holder.calificacion.text="${Favorito.campo2}"
+        holder.calificacion.text="${Favorito.campo2}/5 estrellas"
 
 
        // holder.favorito.text = "${Reserva.campoDerecha}"

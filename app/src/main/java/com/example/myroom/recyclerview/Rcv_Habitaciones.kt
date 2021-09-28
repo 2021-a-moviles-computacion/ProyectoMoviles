@@ -138,7 +138,7 @@ class Rcv_Habitaciones(
             selectorFecha = true
             //val cal = Calendar.getInstance()
             Edia = cal.get(Calendar.DAY_OF_MONTH)
-            Emes = cal.get(Calendar.MONTH)
+            Emes = cal.get(Calendar.MONTH)+1
             Eyear = cal.get(Calendar.YEAR)
             EselectedYear = Eyear
             EselectedMes = Emes
@@ -147,7 +147,7 @@ class Rcv_Habitaciones(
             //val cal2=Calendar.getInstance()
             cal2.add(Calendar.DATE, 1)
             Sdia = cal2.get(Calendar.DAY_OF_MONTH)
-            Smes = cal2.get(Calendar.MONTH)
+            Smes = cal2.get(Calendar.MONTH)+1
             Syear = cal2.get(Calendar.YEAR)
             SselectedYear = Syear
             SselectedMes = Smes
@@ -173,7 +173,7 @@ class Rcv_Habitaciones(
 
             if (selectorFecha) {
                 EselectedYear = year
-                EselectedMes = month
+                EselectedMes = month+1
                 EselectedDia = dayOfMonth
                 fechaEntrada.text = "${EselectedDia}-${EselectedMes}-${EselectedYear}"
                 cal.set(EselectedYear, EselectedMes, EselectedDia)
@@ -181,7 +181,7 @@ class Rcv_Habitaciones(
 
             } else {
                 SselectedYear = year
-                SselectedMes = month
+                SselectedMes = month+1
                 SselectedDia = dayOfMonth
                 fechaSalida.text = "${SselectedDia}-${SselectedMes}-${SselectedYear}"
                 cal2.set(SselectedYear, SselectedMes, SselectedDia)
@@ -412,7 +412,7 @@ class Rcv_Habitaciones(
                                     hashMapOf(
                                         "idUsuario" to auth.uid.toString(),
                                         "idTipoDeHabitacion" to "${habitacion.id}",
-                                        "nombreTipoDeHabitacion" to "${holder.nombre.text}",
+                                        "nombreTipoDeHabitacion" to "${holder.nombre.text.toString()}",
                                         "numeroDeCamas" to habitacion.numeroCamas.toString()
                                             .toInt(),
                                         "numeroDeAdultos" to holder.numeroDeAdultosSeleccionado.text.toString()

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradiente_linear"
     tools:context=".MisReservas">
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_menu_lateral"
         android:layout_width="0dp"
@@ -25,14 +26,14 @@
             android:padding="5dp">
 
             <ImageView
-                android:id="@+id/imageView11"
+                android:id="@+id/img_Logo"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_weight="0"
                 app:srcCompat="@drawable/ic_baseline_house_24" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/tv_slogan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -214,6 +215,7 @@
 
     </com.google.android.material.navigation.NavigationView>
 
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -265,8 +267,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_btn_reserva_activa"
                 android:layout_width="match_parent"
@@ -279,13 +282,14 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_reservaVigente"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
             </androidx.recyclerview.widget.RecyclerView>
+
             <TextView
                 android:id="@+id/tv_btn_reserva_finalizada"
                 android:layout_width="match_parent"
@@ -298,6 +302,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_reservaFinalizada"
                 android:layout_width="wrap_content"

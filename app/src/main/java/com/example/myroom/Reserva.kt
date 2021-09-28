@@ -30,6 +30,28 @@ class Reserva : AppCompatActivity() {
             }
         }
 
+        val botonHomeHeader=findViewById<TextView>(R.id.Title)
+        botonHomeHeader.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+        val botonHomeMenu=findViewById<ImageView>(R.id.img_Logo)
+        botonHomeMenu.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+
+        val botonHomeSlogan=findViewById<TextView>(R.id.tv_slogan)
+        botonHomeSlogan.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            finish()
+        }
+
+
         val botonPerfilIcon=findViewById<ImageView>(R.id.tv_img_perfil)
         botonPerfilIcon.setOnClickListener{
             menuLateral.visibility= NavigationView.INVISIBLE

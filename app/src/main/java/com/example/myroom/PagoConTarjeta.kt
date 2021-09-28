@@ -24,6 +24,27 @@ class PagoConTarjeta : AppCompatActivity() {
         auth = Firebase.auth
         val idCabecera = intent.getStringExtra("idCabecera")
 
+        val botonHomeHeader=findViewById<TextView>(R.id.Title)
+        botonHomeHeader.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+        val botonHomeMenu=findViewById<ImageView>(R.id.img_Logo)
+        botonHomeMenu.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+
+        val botonHomeSlogan=findViewById<TextView>(R.id.tv_slogan)
+        botonHomeSlogan.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            finish()
+        }
+
         val botonConfirmar = findViewById<TextView>(R.id.txt_btn_confirmarPagoTarjeta)
         botonConfirmar.setOnClickListener {
             val db = Firebase.firestore

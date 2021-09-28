@@ -40,7 +40,26 @@ class Perfil : AppCompatActivity() {
         menuLateral.visibility= NavigationView.INVISIBLE
 
         auth = Firebase.auth
+        val botonHomeHeader=findViewById<TextView>(R.id.Title)
+        botonHomeHeader.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
 
+            finish()
+        }
+        val botonHomeMenu=findViewById<ImageView>(R.id.img_Logo)
+        botonHomeMenu.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+
+        val botonHomeSlogan=findViewById<TextView>(R.id.tv_slogan)
+        botonHomeSlogan.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            finish()
+        }
 
         val fileName=auth.currentUser!!.uid +".jpg"
         val userReference=storage.child("FotoPerfil/"+fileName)
@@ -172,11 +191,13 @@ class Perfil : AppCompatActivity() {
             val intent =Intent(this,PreReserva::class.java)
             intent.putExtra("estado","abierta")
             startActivity(intent)
+            finish()
         }
         val botonMisReservas= findViewById<TextView>(R.id.tv_btn_mis_reservas)
         botonMisReservas.setOnClickListener {
             menuLateral.visibility= NavigationView.INVISIBLE
             startActivity(Intent(this,MisReservas::class.java))
+            finish()
         }
         val botonAyuda= findViewById<TextView>(R.id.tv_btn_ayuda)
         botonAyuda.setOnClickListener {
@@ -193,6 +214,7 @@ class Perfil : AppCompatActivity() {
                 baseContext, "NO ESTA DISPONIBLE EN LA VERSION ACTUAL.",
                 Toast.LENGTH_SHORT
             ).show()
+            finish()
         }
 
         val botonCerrarSession= findViewById<TextView>(R.id.tv_btn_cerrar_session)

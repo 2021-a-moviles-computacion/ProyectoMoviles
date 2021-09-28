@@ -106,6 +106,28 @@ class Favoritos : AppCompatActivity() {
                 }
             }
 
+        val botonFavHoteles=findViewById<TextView>(R.id.tv_btn_hotelesFavoritos)
+        botonFavHoteles.setOnClickListener {
+            if(recyclerViewHotelesFavoritos.visibility==RecyclerView.VISIBLE){
+                recyclerViewHotelesFavoritos.visibility=RecyclerView.GONE
+
+            }
+            else{
+                recyclerViewHotelesFavoritos.visibility=RecyclerView.VISIBLE
+            }
+        }
+
+        val botonFavHabitacion=findViewById<TextView>(R.id.tv_btn_habitacionesFavoritos)
+        botonFavHabitacion.setOnClickListener {
+            if(recyclerViewHabitacionesFavoritos.visibility==RecyclerView.VISIBLE){
+                recyclerViewHabitacionesFavoritos.visibility=RecyclerView.GONE
+
+            }
+            else{
+                recyclerViewHabitacionesFavoritos.visibility=RecyclerView.VISIBLE
+            }
+        }
+
 
         val botonAbrirYcerrarMenu = findViewById<ImageView>(R.id.img_btn_menulateral)
         botonAbrirYcerrarMenu.setOnClickListener {
@@ -120,18 +142,20 @@ class Favoritos : AppCompatActivity() {
         botonPerfilIcon.setOnClickListener {
             menuLateral.visibility = NavigationView.INVISIBLE
             startActivity(Intent(this, Perfil::class.java))
+            finish()
         }
 
         val botonPerfil = findViewById<TextView>(R.id.tv_btn_perfil)
         botonPerfil.setOnClickListener {
             menuLateral.visibility = NavigationView.INVISIBLE
             startActivity(Intent(this, Perfil::class.java))
+            finish()
         }
 
         val botonFavoritos = findViewById<TextView>(R.id.tv_btn_favoritos)
         botonFavoritos.setOnClickListener {
             menuLateral.visibility = NavigationView.INVISIBLE
-            startActivity(Intent(this, Favoritos::class.java))
+
         }
         val botonReservar = findViewById<TextView>(R.id.tv_btn_reservar)
         botonReservar.setOnClickListener {
@@ -139,11 +163,13 @@ class Favoritos : AppCompatActivity() {
             val intent = Intent(this, PreReserva::class.java)
             intent.putExtra("estado", "abierta")
             startActivity(intent)
+            finish()
         }
         val botonMisReservas = findViewById<TextView>(R.id.tv_btn_mis_reservas)
         botonMisReservas.setOnClickListener {
             menuLateral.visibility = NavigationView.INVISIBLE
             startActivity(Intent(this, MisReservas::class.java))
+            finish()
         }
         val botonAyuda = findViewById<TextView>(R.id.tv_btn_ayuda)
         botonAyuda.setOnClickListener {
@@ -167,6 +193,27 @@ class Favoritos : AppCompatActivity() {
             menuLateral.visibility = NavigationView.INVISIBLE
             auth.signOut()
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+        val botonHomeHeader=findViewById<TextView>(R.id.Title)
+        botonHomeHeader.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+        val botonHomeMenu=findViewById<ImageView>(R.id.img_Logo)
+        botonHomeMenu.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+
+        val botonHomeSlogan=findViewById<TextView>(R.id.tv_slogan)
+        botonHomeSlogan.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
             finish()
         }
 

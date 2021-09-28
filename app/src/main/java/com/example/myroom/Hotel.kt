@@ -226,12 +226,14 @@ class Hotel : AppCompatActivity() {
         botonPerfilIcon.setOnClickListener {
             menuLateral.visibility = NavigationView.INVISIBLE
             startActivity(Intent(this, Perfil::class.java))
+            finish()
         }
 
         val botonPerfil = findViewById<TextView>(R.id.tv_btn_perfil)
         botonPerfil.setOnClickListener {
             menuLateral.visibility = NavigationView.INVISIBLE
             startActivity(Intent(this, Perfil::class.java))
+            finish()
         }
 
         val botonFavoritos = findViewById<TextView>(R.id.tv_btn_favoritos)
@@ -273,6 +275,26 @@ class Hotel : AppCompatActivity() {
             menuLateral.visibility = NavigationView.INVISIBLE
             auth.signOut()
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+        val botonHomeHeader=findViewById<TextView>(R.id.Title)
+        botonHomeHeader.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+        val botonHomeMenu=findViewById<ImageView>(R.id.img_Logo)
+        botonHomeMenu.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+
+        val botonHomeSlogan=findViewById<TextView>(R.id.tv_slogan)
+        botonHomeSlogan.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
             finish()
         }
 

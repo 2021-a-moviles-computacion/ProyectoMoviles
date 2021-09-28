@@ -27,14 +27,14 @@
             android:padding="5dp">
 
             <ImageView
-                android:id="@+id/imageView11"
+                android:id="@+id/img_Logo"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_weight="0"
                 app:srcCompat="@drawable/ic_baseline_house_24" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/tv_slogan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -264,51 +264,53 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_btn_hotelesFavoritos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:id="@+id/tv_btn_hotelesFavoritos"
-                    android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:background="@drawable/boton_positivo"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:text="Hoteles Favoritos"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold|italic" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_hotelesFavoritos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
+                android:layout_height="53dp"
+                android:background="@drawable/boton_positivo"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="Hoteles Favoritos"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
 
-                </androidx.recyclerview.widget.RecyclerView>
-                <TextView
-                    android:id="@+id/tv_btn_habitacionesFavoritos"
-                    android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:background="@drawable/boton_positivo"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:text="Habitaciones Favoritos"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold|italic" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_habitacionesFavoritas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_hotelesFavoritos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_btn_habitacionesFavoritos"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:background="@drawable/boton_positivo"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="Habitaciones Favoritos"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_habitacionesFavoritas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
 
 
     </LinearLayout>

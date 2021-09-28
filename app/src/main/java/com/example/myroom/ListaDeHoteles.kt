@@ -80,7 +80,26 @@ class ListaDeHoteles : AppCompatActivity() {
         auth = Firebase.auth
 
 
+        val botonHomeHeader=findViewById<TextView>(R.id.Title)
+        botonHomeHeader.setOnClickListener {
 
+
+
+        }
+        val botonHomeMenu=findViewById<ImageView>(R.id.img_Logo)
+        botonHomeMenu.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+
+
+
+        }
+
+        val botonHomeSlogan=findViewById<TextView>(R.id.tv_slogan)
+        botonHomeSlogan.setOnClickListener {
+
+            menuLateral.visibility = NavigationView.INVISIBLE
+
+        }
 
         val botonAbrirYcerrarMenu= findViewById<ImageView>(R.id.img_btn_menulateral)
         botonAbrirYcerrarMenu.setOnClickListener{

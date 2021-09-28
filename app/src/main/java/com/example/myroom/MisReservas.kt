@@ -3,9 +3,11 @@ package com.example.myroom
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myroom.objetos.Variable
 import com.example.myroom.recyclerview.Rcv_mis_reservas
@@ -27,7 +29,26 @@ class MisReservas : AppCompatActivity() {
         menuLateral.visibility= NavigationView.INVISIBLE
         auth = Firebase.auth
 
+        val botonHomeHeader=findViewById<TextView>(R.id.Title)
+        botonHomeHeader.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
 
+            finish()
+        }
+        val botonHomeMenu=findViewById<ImageView>(R.id.img_Logo)
+        botonHomeMenu.setOnClickListener {
+            menuLateral.visibility = NavigationView.INVISIBLE
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+
+            finish()
+        }
+
+        val botonHomeSlogan=findViewById<TextView>(R.id.tv_slogan)
+        botonHomeSlogan.setOnClickListener {
+            startActivity(Intent(this,ListaDeHoteles::class.java))
+            menuLateral.visibility = NavigationView.INVISIBLE
+            finish()
+        }
         val listaVigente=ArrayList<Variable>()
         val listaFinalizadas=ArrayList<Variable>()
 
@@ -36,6 +57,29 @@ class MisReservas : AppCompatActivity() {
 
         val adapterVigente=Rcv_mis_reservas(this,recyclerViewVigente,listaVigente)
         val adapterFinalizadas=Rcv_mis_reservas(this,recyclerViewFinalizadas,listaFinalizadas)
+
+        val botonActivas=findViewById<TextView>(R.id.tv_btn_reserva_activa)
+        botonActivas.setOnClickListener {
+            if(recyclerViewVigente.visibility==RecyclerView.VISIBLE){
+                recyclerViewVigente.visibility=RecyclerView.GONE
+
+            }
+            else{
+                recyclerViewVigente.visibility=RecyclerView.VISIBLE
+            }
+        }
+
+        val botonFinalizadas=findViewById<TextView>(R.id.tv_btn_reserva_finalizada)
+        botonFinalizadas.setOnClickListener {
+            if(recyclerViewFinalizadas.visibility==RecyclerView.VISIBLE){
+                recyclerViewFinalizadas.visibility=RecyclerView.GONE
+
+            }
+            else{
+                recyclerViewFinalizadas.visibility=RecyclerView.VISIBLE
+            }
+        }
+
 
         db.collection("ReservaCabecera").whereEqualTo("idUsuario","${auth.uid}").get()
             .addOnSuccessListener {
@@ -69,10 +113,10 @@ class MisReservas : AppCompatActivity() {
                             }
 
                     }
-                    else if(reserva["estado"]=="finalizado"){
-                        db.collection("hotel").document("${reserva["idHotel"]}").get()
+                    else if(reserva["estado"]=="finalizada"){
+                        db.collection("Hotel").document("${reserva["idHotel"]}").get()
                             .addOnSuccessListener { hotel->
-                                storage.child("Hotel/${hotel.id}/1.jpg").getBytes(1024*1024*3)
+                                storage.child("Hoteles/${hotel.id}/1.jpg").getBytes(1024*1024*3)
                                     .addOnSuccessListener {  imagen->
                                         listaFinalizadas.add(
                                             Variable(
@@ -82,10 +126,11 @@ class MisReservas : AppCompatActivity() {
                                                 "${hotel.getString("ciudad")}, ${hotel.getString("pais")}",
                                                 "${hotel.getDouble("puntuacion")} estrallas",
                                                 "${reserva.getString("fechaEntradaSalida")}",
-                                                "$ ${reserva.getString("total")}"
+                                                "$ ${reserva.getDouble("total")}"
 
                                             )
                                         )
+                                        Log.i("Lista","${listaFinalizadas.size}")
                                         recyclerViewFinalizadas.adapter=adapterFinalizadas
                                         recyclerViewFinalizadas.itemAnimator=androidx.recyclerview.widget.DefaultItemAnimator()
                                         recyclerViewFinalizadas.layoutManager=androidx.recyclerview.widget.LinearLayoutManager(this)
@@ -122,18 +167,21 @@ class MisReservas : AppCompatActivity() {
         botonPerfilIcon.setOnClickListener{
             menuLateral.visibility= NavigationView.INVISIBLE
             startActivity(Intent(this,Perfil::class.java))
+            finish()
         }
 
         val botonPerfil = findViewById<TextView>(R.id.tv_btn_perfil)
         botonPerfil.setOnClickListener {
             menuLateral.visibility= NavigationView.INVISIBLE
             startActivity(Intent(this,Perfil::class.java))
+            finish()
         }
 
         val botonFavoritos= findViewById<TextView>(R.id.tv_btn_favoritos)
         botonFavoritos.setOnClickListener {
             menuLateral.visibility= NavigationView.INVISIBLE
             startActivity(Intent(this,Favoritos::class.java))
+            finish()
         }
         val botonReservar= findViewById<TextView>(R.id.tv_btn_reservar)
         botonReservar.setOnClickListener {
@@ -141,11 +189,12 @@ class MisReservas : AppCompatActivity() {
             val intent =Intent(this,PreReserva::class.java)
             intent.putExtra("estado","abierta")
             startActivity(intent)
+            finish()
         }
         val botonMisReservas= findViewById<TextView>(R.id.tv_btn_mis_reservas)
         botonMisReservas.setOnClickListener {
             menuLateral.visibility= NavigationView.INVISIBLE
-            startActivity(Intent(this,MisReservas::class.java))
+
         }
         val botonAyuda= findViewById<TextView>(R.id.tv_btn_ayuda)
         botonAyuda.setOnClickListener {
