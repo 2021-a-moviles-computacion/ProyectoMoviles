@@ -120,4 +120,8 @@ class PagoConPaypal : AppCompatActivity() {
     fun hash(dato:String):String{
         return BigInteger(1, MessageDigest.getInstance("MD5").digest(dato.toByteArray())).toString(16).padStart(32,'0')
     }
+    override fun onPause() {
+        super.onPause()
+        finish()
+    }
 }

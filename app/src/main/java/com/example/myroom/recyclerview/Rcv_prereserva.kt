@@ -67,7 +67,12 @@ class Rcv_prereserva (
         holder.numHabitacionCamas.text="${preReserva.numeroDeCuartos} habitacion(es) | ${preReserva.numeroDeCamas} cama(s)"
         holder.numAdultosNinos.text=   "${preReserva.numeroDeAdultos} adulto(s)      | ${preReserva.numeroDeNinos} niño(s)"
         holder.entradaSalida.text="${preReserva.fechaEntrada} -- ${preReserva.fechaSalida}"
-        holder.precio.text = "${preReserva.subtotal}"
+        holder.precio.text = "$ ${preReserva.subtotal}"
+
+        if(preReserva.numeroDeDias==-99){
+            holder.editar.visibility=TextView.INVISIBLE
+            holder.eliminar.visibility=TextView.INVISIBLE
+        }
 
         holder.eliminar.setOnClickListener {
             db.collection("ReservaHabitacion").document("${preReserva.id}").delete()

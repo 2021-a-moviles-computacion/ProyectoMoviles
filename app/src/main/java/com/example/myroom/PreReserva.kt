@@ -63,7 +63,7 @@ class PreReserva : AppCompatActivity() {
         val recyclerViewPreReserva = findViewById<RecyclerView>(R.id.rv_listaPrereserva)
         val adapterPreReserva = Rcv_prereserva(this, recyclerViewPreReserva, listaPreReserva)
         if (estado=="abierta") {
-            db.collection("ReservaCabecera").whereEqualTo("estado", "abierta").get()
+            db.collection("ReservaCabecera").whereEqualTo("estado", "abierta").whereEqualTo("idUsuario","${auth.uid}").get()
                 .addOnSuccessListener {
                     if (it.size() > 0) {
                         db.collection("ReservaHabitacion")
@@ -157,11 +157,13 @@ class PreReserva : AppCompatActivity() {
                         db.collection("ReservaHabitacion")
                             .whereEqualTo("idReservaCabecera", "${it.id}").get()
                             .addOnSuccessListener { listaHabitaciones ->
+                                var suma=0.0
                                 for (habitacion in listaHabitaciones) {
 
                                     reference.child("TiposHabitaciones/${habitacion.data["idTipoDeHabitacion"]}/1.jpg")
                                         .getBytes(1024 * 1024 * 3)
                                         .addOnSuccessListener { imagen ->
+                                            findViewById<TextView>(R.id.tv_preReserva_nombreHotel).text=""
                                             listaPreReserva.add(
                                                 ReservaHabitacion(
                                                     habitacion.id,
@@ -177,7 +179,7 @@ class PreReserva : AppCompatActivity() {
                                                     habitacion.getDouble("numeroDeCamas")!!.toInt(),
                                                     habitacion.getDouble("numeroDeCuartos")!!
                                                         .toInt(),
-                                                    habitacion.getDouble("numeroDeDias")!!.toInt(),
+                                                    -99,
                                                     habitacion.getDouble("numeroDeNin")!!.toInt(),
                                                     habitacion.getDouble("subtotal"),
 
@@ -193,9 +195,9 @@ class PreReserva : AppCompatActivity() {
                                                 )
                                             adapterPreReserva.notifyDataSetChanged()
                                         }
-
+                                    suma= (suma + habitacion.getDouble("subtotal")!!)
                                 }
-
+                                findViewById<TextView>(R.id.txv_precioTotalPrereserva).text="$ ${suma}"
                             }
                     } else {
                         Toast.makeText(
@@ -208,7 +210,13 @@ class PreReserva : AppCompatActivity() {
                 }
         }
 
-
+        recyclerViewPreReserva.setOnClickListener{
+            var suma=0.0
+            listaPreReserva.forEach {
+                suma=suma+ it.subtotal!!
+            }
+            findViewById<TextView>(R.id.txv_precioTotalPrereserva).text="$ ${suma}"
+        }
         val botonAbrirYcerrarMenu = findViewById<ImageView>(R.id.img_btn_menulateral)
         botonAbrirYcerrarMenu.setOnClickListener {
             if (menuLateral.visibility == NavigationView.INVISIBLE) {
@@ -272,5 +280,10 @@ class PreReserva : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 }

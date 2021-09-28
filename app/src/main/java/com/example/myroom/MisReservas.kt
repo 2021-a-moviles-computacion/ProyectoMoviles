@@ -54,7 +54,7 @@ class MisReservas : AppCompatActivity() {
                                                "${hotel.getString("ciudad")}, ${hotel.getString("pais")}",
                                                "${hotel.getDouble("puntuacion").toString()} estrellas",
                                                "${reserva.getString("fechaEntradaSalida")}",
-                                               "$ ${reserva.getDouble("total").toString()}"
+                                               "${reserva.getDouble("total").toString()}"
 
                                            )
                                        )
