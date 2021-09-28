@@ -33,8 +33,50 @@ class Hotel : AppCompatActivity() {
         val menuLateral = findViewById<NavigationView>(R.id.nv_menu_lateral)
         menuLateral.visibility = NavigationView.INVISIBLE
         auth = Firebase.auth
+
+
+
         val listaImagenes = arrayListOf<ByteArray>()
         val idHotel = intent.getStringExtra("id")
+
+        val botonAddFavoritos=findViewById<ImageView>(R.id.img_btn_favoritos_hoteles)
+        botonAddFavoritos.setOnClickListener {
+               db.collection("HotelFavoritos").whereEqualTo("idHotel","${idHotel}").whereEqualTo("idUsuario","${auth.uid}").get()
+                   .addOnSuccessListener {
+                       if(it.isEmpty){
+                           db.collection("Hotel").document("${idHotel}").get()
+                               .addOnSuccessListener { hotel->
+                                   db.collection("HotelFavoritos").add(
+                                       hashMapOf(
+                                           "idHotel" to "${hotel.id}",
+                                           "nombreHotel" to "${hotel.getString("nombre")}",
+                                           "direccion" to "${hotel.getString("ciudad")}, ${hotel.getString("pais")}",
+                                           "puntuacion" to "${hotel.getDouble("puntuacion")}",
+                                           "idUsuario" to "${auth.uid}"
+
+                                       )
+                                   ).addOnSuccessListener {
+                                       Toast.makeText(this,"Agregado a Favoritos",Toast.LENGTH_SHORT).show()
+                                   }
+
+                               }
+
+
+
+
+                       }
+                       else{
+                           db.collection("HotelFavoritos").document("${it.documents[0].id}").delete()
+                               .addOnSuccessListener {
+                                   Toast.makeText(this,"Elimiado de Favoritos",Toast.LENGTH_SHORT).show()
+                               }
+                       }
+                   }
+        }
+
+
+
+
         val recyclerViewImagenesHotel = findViewById<RecyclerView>(R.id.rv_fotosHotel)
 
         val adapter = Rcv_Imagenes_Horizontales(this, recyclerViewImagenesHotel, listaImagenes)

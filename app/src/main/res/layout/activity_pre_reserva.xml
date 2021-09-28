@@ -179,12 +179,12 @@
                     />
 
 
-
-
             </LinearLayout>
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="200dp"></Space>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -257,17 +257,18 @@
 
             <ImageView
                 android:id="@+id/tv_img_perfil"
-                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
                 app:srcCompat="@drawable/ic_baseline_person_24" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="688dp"
+            android:layout_height="657dp"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_preReserva_nombreHotel"
                 android:layout_width="match_parent"
@@ -283,7 +284,7 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="525dp">
+                android:layout_height="530dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_listaPrereserva"
@@ -319,34 +320,36 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_btn_hacerReservar"
-                android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:background="@drawable/boton_ver_habitacion"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="Seleccionar forma de pago"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_btn_PagohacerReservar"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:background="@drawable/boton_ver_habitacion"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Seleccionar Metodo de Pago"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
     <!-- hola perro-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="393dp"
+        android:id="@+id/menu_metodo_de_pago"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="153dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" >
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="150dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent">
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_prereserva_metodo_de_pago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 

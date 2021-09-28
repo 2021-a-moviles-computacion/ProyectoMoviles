@@ -3,12 +3,17 @@ package com.example.myroom
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myroom.objetos.ReservaHabitacion
+import com.example.myroom.objetos.metodoDePago
 import com.example.myroom.recyclerview.Rcv_prereserva
+import com.example.myroom.recyclerview.Rcv_seleccion_metodos_pago
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -30,7 +35,28 @@ class PreReserva : AppCompatActivity() {
         auth = Firebase.auth
 
         val estado = intent.getStringExtra("estado")
+        val menuMetodoPago=findViewById<BottomNavigationView>(R.id.menu_metodo_de_pago)
+        menuMetodoPago.visibility=BottomNavigationView.INVISIBLE
+        val listaMetodosDePago = ArrayList<metodoDePago>()
+        val recyclerViewMetodoDePago=findViewById<RecyclerView>(R.id.rv_prereserva_metodo_de_pago)
 
+        val adapterMetodoDePago=Rcv_seleccion_metodos_pago(this,recyclerViewMetodoDePago,listaMetodosDePago)
+        val botonSeleccionMetodoDePago=findViewById<TextView>(R.id.tv_btn_PagohacerReservar)
+        if(estado!="abierta"){
+            botonSeleccionMetodoDePago.visibility=TextView.INVISIBLE
+        }
+        botonSeleccionMetodoDePago.setOnClickListener {
+            if(menuMetodoPago.visibility==BottomNavigationView.VISIBLE){
+                menuMetodoPago.visibility=BottomNavigationView.INVISIBLE
+                botonSeleccionMetodoDePago.text="Seleccionar Metodo de Pago"
+            }
+            else{
+                menuMetodoPago.visibility=BottomNavigationView.VISIBLE
+                botonSeleccionMetodoDePago.text="Regresar"
+            }
+
+
+        }
 
         val listaPreReserva = ArrayList<ReservaHabitacion>()
         val reference = Firebase.storage.reference
@@ -50,6 +76,13 @@ class PreReserva : AppCompatActivity() {
                                         .getBytes(1024 * 1024 * 3)
                                         .addOnSuccessListener { imagen ->
                                             findViewById<TextView>(R.id.tv_preReserva_nombreHotel).text=it.documents[0].getString("nombreHotel")
+
+
+
+
+
+
+
                                             listaPreReserva.add(
                                                 ReservaHabitacion(
                                                     habitacion.id,
@@ -84,6 +117,27 @@ class PreReserva : AppCompatActivity() {
                                         }
                                     suma= (suma + habitacion.getDouble("subtotal")!!)
                                 }
+                                db.collection("Hotel").document("${it.documents[0].getString("idHotel")}").get()
+                                    .addOnSuccessListener { hotel->
+                                        var hashMetodos: HashMap<String, Any> =
+                                            hotel.data!!.get("metodosDePago") as HashMap<String, Any>
+
+                                        if (hashMetodos["pagoConTarjeta"] == true) {
+                                            listaMetodosDePago.add(metodoDePago("Pago Con Tarjeta","${it.documents[0].id}"))
+                                        }
+                                        if (hashMetodos["pagoConPayPal"] == true) {
+                                            listaMetodosDePago.add(metodoDePago("Pago con PayPal","${it.documents[0].id}"))
+                                        }
+                                        if (hashMetodos["pagoEnHotel"] == true) {
+                                            listaMetodosDePago.add(metodoDePago("Pago en el Hotel","${it.documents[0].id}"))
+                                        }
+
+                                       // Log.i("cabecera","${idCabecera}")
+                                        recyclerViewMetodoDePago.adapter=adapterMetodoDePago
+                                        recyclerViewMetodoDePago.itemAnimator=androidx.recyclerview.widget.DefaultItemAnimator()
+                                        recyclerViewMetodoDePago.layoutManager=androidx.recyclerview.widget.LinearLayoutManager(this)
+                                        adapterMetodoDePago.notifyDataSetChanged()
+                                    }
                                 findViewById<TextView>(R.id.txv_precioTotalPrereserva).text="$ ${suma}"
                             }
                     } else {
@@ -96,6 +150,7 @@ class PreReserva : AppCompatActivity() {
                     }
                 }
         }else{
+
             db.collection("ReservaCabecera").document("${estado}").get()
                 .addOnSuccessListener {
                     if (it!= null) {

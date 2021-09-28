@@ -9,11 +9,30 @@
     android:background="@drawable/gradiente_linear">
 
 
-    <ImageView
-        android:id="@+id/img_tipo_habitacion"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="253dp"
-        app:srcCompat="@drawable/ic_action_name" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_tipo_habitacion"
+            android:layout_width="match_parent"
+            android:layout_height="253dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_action_name" />
+
+        <ImageView
+            android:id="@+id/img_btn_favoritos"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_favorite_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/txv_tipoHabitacionLista"

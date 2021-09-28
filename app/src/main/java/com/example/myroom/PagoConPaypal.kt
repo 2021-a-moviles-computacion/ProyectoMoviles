@@ -9,7 +9,10 @@ import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.math.BigInteger
+import java.security.MessageDigest
 
 class PagoConPaypal : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -21,6 +24,34 @@ class PagoConPaypal : AppCompatActivity() {
         val menuLateral=findViewById<NavigationView>(R.id.nv_menu_lateral)
         menuLateral.visibility= NavigationView.INVISIBLE
         auth = Firebase.auth
+
+        val idCabecera=intent.getStringExtra("idCabecera")
+
+        val botonConfirmar = findViewById<TextView>(R.id.txt_btn_confirmarPagoPaypal)
+        botonConfirmar.setOnClickListener {
+            val db = Firebase.firestore
+
+            db.collection("PagoConPayPal").add(
+                hashMapOf(
+                    "idUsuario" to "${auth.uid}",
+                    "idReserva" to "${idCabecera}",
+                    "correo" to "${hash(findViewById<TextView>(R.id.txt_correoPaypal).text.toString())}",
+                    "clave" to "${hash(findViewById<TextView>(R.id.txv_clavePaypal).text.toString())}"
+
+                )
+
+            )
+                .addOnSuccessListener {
+                    db.collection("ReservaCabecera").document("${idCabecera}")
+                        .update(
+                            "estado", "vigente",
+                            "metodoDePago", "pagoConPayPal"
+                        ).addOnSuccessListener {
+                            startActivity(Intent(this, MisReservas::class.java))
+                            finish()
+                        }
+                }
+        }
 
         val botonAbrirYcerrarMenu= findViewById<ImageView>(R.id.img_btn_menulateral)
         botonAbrirYcerrarMenu.setOnClickListener{
@@ -85,5 +116,8 @@ class PagoConPaypal : AppCompatActivity() {
             finish()
         }
 
+    }
+    fun hash(dato:String):String{
+        return BigInteger(1, MessageDigest.getInstance("MD5").digest(dato.toByteArray())).toString(16).padStart(32,'0')
     }
 }

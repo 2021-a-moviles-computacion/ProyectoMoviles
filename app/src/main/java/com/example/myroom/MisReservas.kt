@@ -6,19 +6,108 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myroom.objetos.Variable
+import com.example.myroom.recyclerview.Rcv_mis_reservas
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class MisReservas : AppCompatActivity() {
     private lateinit var auth:FirebaseAuth
+    val db= Firebase.firestore
+    val storage = Firebase.storage.reference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mis_reservas)
         val menuLateral=findViewById<NavigationView>(R.id.nv_menu_lateral)
         menuLateral.visibility= NavigationView.INVISIBLE
         auth = Firebase.auth
+
+
+        val listaVigente=ArrayList<Variable>()
+        val listaFinalizadas=ArrayList<Variable>()
+
+        val recyclerViewVigente = findViewById<RecyclerView>(R.id.rv_reservaVigente)
+        val recyclerViewFinalizadas=findViewById<RecyclerView>(R.id.rv_reservaFinalizada)
+
+        val adapterVigente=Rcv_mis_reservas(this,recyclerViewVigente,listaVigente)
+        val adapterFinalizadas=Rcv_mis_reservas(this,recyclerViewFinalizadas,listaFinalizadas)
+
+        db.collection("ReservaCabecera").whereEqualTo("idUsuario","${auth.uid}").get()
+            .addOnSuccessListener {
+                for (reserva in it){
+
+                    if(reserva["estado"]=="vigente"){
+                        db.collection("Hotel").document("${reserva["idHotel"]}").get()
+                            .addOnSuccessListener { hotel->
+                               storage.child("Hoteles/${hotel.id}/1.jpg").getBytes(1024*1024*3)
+                                   .addOnSuccessListener {  imagen->
+                                       listaVigente.add(
+                                           Variable(
+                                               "${reserva.id}",
+                                               imagen,
+                                               reserva.getString("nombreHotel"),
+                                               "${hotel.getString("ciudad")}, ${hotel.getString("pais")}",
+                                               "${hotel.getDouble("puntuacion").toString()} estrellas",
+                                               "${reserva.getString("fechaEntradaSalida")}",
+                                               "$ ${reserva.getDouble("total").toString()}"
+
+                                           )
+                                       )
+                                       recyclerViewVigente.adapter=adapterVigente
+                                       recyclerViewVigente.itemAnimator=androidx.recyclerview.widget.DefaultItemAnimator()
+                                       recyclerViewVigente.layoutManager=androidx.recyclerview.widget.LinearLayoutManager(this)
+                                       adapterVigente.notifyDataSetChanged()
+                                   }
+
+
+
+                            }
+
+                    }
+                    else if(reserva["estado"]=="finalizado"){
+                        db.collection("hotel").document("${reserva["idHotel"]}").get()
+                            .addOnSuccessListener { hotel->
+                                storage.child("Hotel/${hotel.id}/1.jpg").getBytes(1024*1024*3)
+                                    .addOnSuccessListener {  imagen->
+                                        listaFinalizadas.add(
+                                            Variable(
+                                                "${reserva.id}",
+                                                imagen,
+                                                reserva.getString("nombreHotel"),
+                                                "${hotel.getString("ciudad")}, ${hotel.getString("pais")}",
+                                                "${hotel.getDouble("puntuacion")} estrallas",
+                                                "${reserva.getString("fechaEntradaSalida")}",
+                                                "$ ${reserva.getString("total")}"
+
+                                            )
+                                        )
+                                        recyclerViewFinalizadas.adapter=adapterFinalizadas
+                                        recyclerViewFinalizadas.itemAnimator=androidx.recyclerview.widget.DefaultItemAnimator()
+                                        recyclerViewFinalizadas.layoutManager=androidx.recyclerview.widget.LinearLayoutManager(this)
+                                        adapterFinalizadas.notifyDataSetChanged()
+                                    }
+
+
+
+                            }
+
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
+
 
         val botonAbrirYcerrarMenu= findViewById<ImageView>(R.id.img_btn_menulateral)
         botonAbrirYcerrarMenu.setOnClickListener{
@@ -82,6 +171,8 @@ class MisReservas : AppCompatActivity() {
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         }
+
+
 
     }
 }

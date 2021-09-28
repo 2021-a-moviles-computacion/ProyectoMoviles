@@ -98,7 +98,11 @@ class Rcv_Habitaciones(
         //val adapter: Rcv_Imagenes_Horizontales
         var total: Double
 
+
+        var favorito:ImageView
+
         init {
+            favorito=view.findViewById(R.id.img_btn_favoritos)
             diferenciaFechas = 1
             nombre = view.findViewById(R.id.txv_tipoHabitacionLista)
             fotoHabitacion = view.findViewById(R.id.img_tipo_habitacion)
@@ -514,8 +518,44 @@ class Rcv_Habitaciones(
 
         }
 
+        holder.favorito.setOnClickListener {
+            val db =Firebase.firestore
+                db.collection("HabitacionFavorita").whereEqualTo("idHabitacion","${habitacion.id}").whereEqualTo("idUsuario","${auth.uid}").get()
+                    .addOnSuccessListener {
+                        if(it.isEmpty){
+
+                                    db.collection("HabitacionFavorita").add(
+                                        hashMapOf(
+                                            "idHabitacion" to "${habitacion.id}",
+                                            "nombreHotel" to "${nombreHotel}",
+                                            "nombreHabitacion" to "${habitacion.nombre}",
+                                            "precioInicial" to "${habitacion.precioInicial}",
+                                            "numCamasPersonas" to "${habitacion.numeroCamas} cama(s), ${habitacion.numeroMinAdultos} persona(s)",
+                                            "idUsuario" to "${auth.uid}"
+
+                                        )
+                                    ).addOnSuccessListener {
+                                        Toast.makeText(context,"Agregado a Favoritos",Toast.LENGTH_SHORT).show()
+                                    }
+
+
+
+
+
+
+                        }
+                        else{
+                            db.collection("HabitacionFavorita").document("${it.documents[0].id}").delete()
+                                .addOnSuccessListener {
+                                    Toast.makeText(context,"Elimiado de Favoritos",Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    }
+            }
 
     }
+
+
 
 
     override fun getItemCount(): Int {

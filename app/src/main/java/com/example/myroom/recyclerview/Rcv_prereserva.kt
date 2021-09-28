@@ -72,6 +72,9 @@ class Rcv_prereserva (
         holder.eliminar.setOnClickListener {
             db.collection("ReservaHabitacion").document("${preReserva.id}").delete()
                 .addOnSuccessListener {
+                    list.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyDataSetChanged()
                     Log.i("firestore","Reserva Habitacion eliminado")
                 }.addOnFailureListener {
                   Toast.makeText(context,"Error eliminando",Toast.LENGTH_SHORT).show()
@@ -84,7 +87,7 @@ class Rcv_prereserva (
             intent.putExtra("idPrereserva","${preReserva.id}")
 
             context.startActivity(intent)
-            Toast.makeText(context,"Ponga Aqui su codigo",Toast.LENGTH_SHORT).show()
+
         }
 
 
