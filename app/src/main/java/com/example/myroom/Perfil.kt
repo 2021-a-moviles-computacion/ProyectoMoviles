@@ -289,8 +289,5 @@ class Perfil : AppCompatActivity() {
             }
         }
     }
-    override fun onPause() {
-        super.onPause()
-        finish()
-    }
+
 }

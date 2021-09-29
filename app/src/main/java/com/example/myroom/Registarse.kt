@@ -83,7 +83,7 @@ class Registarse : AppCompatActivity() {
                                     }
 
                                 val builder = AlertDialog.Builder(this)
-                                builder.setTitle("Compretar Perfil")
+                                builder.setTitle("Completar Perfil")
                                 builder.setMessage("Desea continuar configurando su perfil")
                                 builder.setPositiveButton(
                                     "Sí", DialogInterface.OnClickListener { dialog, id ->

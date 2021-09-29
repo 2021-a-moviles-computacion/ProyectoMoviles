@@ -68,7 +68,7 @@ class Hotel : AppCompatActivity() {
                        else{
                            db.collection("HotelFavoritos").document("${it.documents[0].id}").delete()
                                .addOnSuccessListener {
-                                   Toast.makeText(this,"Elimiado de Favoritos",Toast.LENGTH_SHORT).show()
+                                   Toast.makeText(this,"Eliminado de Favoritos",Toast.LENGTH_SHORT).show()
                                }
                        }
                    }

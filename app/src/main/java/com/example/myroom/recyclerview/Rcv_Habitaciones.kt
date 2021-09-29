@@ -138,7 +138,7 @@ class Rcv_Habitaciones(
             selectorFecha = true
             //val cal = Calendar.getInstance()
             Edia = cal.get(Calendar.DAY_OF_MONTH)
-            Emes = cal.get(Calendar.MONTH)+1
+            Emes = cal.get(Calendar.MONTH)
             Eyear = cal.get(Calendar.YEAR)
             EselectedYear = Eyear
             EselectedMes = Emes
@@ -147,7 +147,7 @@ class Rcv_Habitaciones(
             //val cal2=Calendar.getInstance()
             cal2.add(Calendar.DATE, 1)
             Sdia = cal2.get(Calendar.DAY_OF_MONTH)
-            Smes = cal2.get(Calendar.MONTH)+1
+            Smes = cal2.get(Calendar.MONTH)
             Syear = cal2.get(Calendar.YEAR)
             SselectedYear = Syear
             SselectedMes = Smes
@@ -173,17 +173,17 @@ class Rcv_Habitaciones(
 
             if (selectorFecha) {
                 EselectedYear = year
-                EselectedMes = month+1
+                EselectedMes = month
                 EselectedDia = dayOfMonth
-                fechaEntrada.text = "${EselectedDia}-${EselectedMes}-${EselectedYear}"
+                fechaEntrada.text = "${EselectedDia}-${EselectedMes+1}-${EselectedYear}"
                 cal.set(EselectedYear, EselectedMes, EselectedDia)
 
 
             } else {
                 SselectedYear = year
-                SselectedMes = month+1
+                SselectedMes = month
                 SselectedDia = dayOfMonth
-                fechaSalida.text = "${SselectedDia}-${SselectedMes}-${SselectedYear}"
+                fechaSalida.text = "${SselectedDia}-${SselectedMes+1}-${SselectedYear}"
                 cal2.set(SselectedYear, SselectedMes, SselectedDia)
 
             }
@@ -499,7 +499,7 @@ class Rcv_Habitaciones(
                             "numeroDeCuartos" , holder.numeroHabitacionesSeleccionadas.text.toString()
                                 .toInt(),
 
-                            "fechaEntada" ,"${holder.fechaEntrada.text.toString()}",
+                            "fechaEntrada" ,"${holder.fechaEntrada.text.toString()}",
                             "fechaSalida" ,"${holder.fechaSalida.text}",
                             "numeroDeDias", holder.diferenciaFechas,
                             "subtotal" , holder.total
@@ -547,7 +547,7 @@ class Rcv_Habitaciones(
                         else{
                             db.collection("HabitacionFavorita").document("${it.documents[0].id}").delete()
                                 .addOnSuccessListener {
-                                    Toast.makeText(context,"Elimiado de Favoritos",Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context,"Eliminado de Favoritos",Toast.LENGTH_SHORT).show()
                                 }
                         }
                     }
