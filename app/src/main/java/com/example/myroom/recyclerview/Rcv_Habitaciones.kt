@@ -230,9 +230,9 @@ class Rcv_Habitaciones(
         holder.numeroDeNinSeleccionado.text = "0"
         //var formato = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         holder.fechaEntrada.text =
-            "${holder.EselectedDia}-${holder.EselectedMes}-${holder.EselectedYear}"
+            "${holder.EselectedDia}-${holder.EselectedMes+1}-${holder.EselectedYear}"
         holder.fechaSalida.text =
-            "${holder.SselectedDia}-${holder.SselectedMes}-${holder.SselectedYear}"
+            "${holder.SselectedDia}-${holder.SselectedMes+1}-${holder.SselectedYear}"
         //LocalDate.parse( holder.fechaEntrada.text,formato)
         // LocalDate.parse(holder.fechaSalida.text,formato).plusDays(1)
         val costoAdulto = (holder.numeroDeAdultosSeleccionado.text.toString()
